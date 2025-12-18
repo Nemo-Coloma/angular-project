@@ -1,30 +1,29 @@
 import { Injectable } from '@angular/core';
-import { createClient, SupabaseClient } from '@supabase/supabase-js';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
+import { Observable, throwError } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'
 })
 export class SupabaseService {
-    private supabase: SupabaseClient;
+    constructor(private http: HttpClient) { }
 
-    constructor() {
-        this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
+    private get headers() {
+        return new HttpHeaders({
+            'apikey': environment.supabaseKey,
+            'Authorization': `Bearer ${environment.supabaseKey}`,
+            'Content-Type': 'application/json'
+        });
     }
 
-    get client() {
-        return this.supabase;
+    getBrands(): Observable<any[]> {
+        return this.http.get<any[]>(`${environment.supabaseUrl}/rest/v1/brands?select=*`, { headers: this.headers }).pipe(
+            catchError(error => {
+                console.error('Supabase REST error:', error);
+                return throwError(error);
+            })
+        );
     }
-
-
-    async getBrands() {
-        const { data, error } = await this.supabase
-            .from('brands')
-            .select('*');
-
-        if (error) throw error;
-        return data;
-    }
-
-
 }

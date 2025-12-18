@@ -37,15 +37,9 @@ export class RegisterComponent implements OnInit {
       this.authService.register(registerModel).subscribe(response => {
         this.toasterService.success(response.message, "Success")
         this.dataLoaded = true
-
       }
         , responseError => {
-
-          if (responseError.error.ValidationErrors.length > 0) {
-
-            this.toasterService.error(responseError.error, "Hata!")
-          }
-
+          this.toasterService.error(responseError.error, "Error!")
         })
     }
     else {

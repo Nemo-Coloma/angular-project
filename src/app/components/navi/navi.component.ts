@@ -11,9 +11,14 @@ import { LocalStorageService } from 'src/app/services/local-storage-service.serv
   styleUrls: ['./navi.component.css']
 })
 export class NaviComponent implements OnInit {
-  lastName = this.authService.name;
-  firstName = this.authService.surname;
-  userRol = this.authService.role
+  get lastName() { return this.authService.surname; }
+  get firstName() { return this.authService.name; }
+  get userRol() {
+    if (Array.isArray(this.authService.role)) {
+      return this.authService.role[0];
+    }
+    return this.authService.role;
+  }
   constructor(
     private authService: AuthService,
     private toasterService: ToastrService,

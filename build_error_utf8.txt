@@ -1,0 +1,852 @@
+﻿node.exe : - Generating browser 
+application bundles...
+At C:\Program 
+Files\nodejs\npx.ps1:29 char:3
++   & $NODE_EXE $NPX_CLI_JS 
+$args
++   
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : N 
+   otSpecified: (- Generating   
+  br...tion bundles...:String   
+ ) [], RemoteException
+    + FullyQualifiedErrorId : N 
+   ativeCommandError
+ 
+(node:15928) [DEP0060] 
+DeprecationWarning: The 
+`util._extend` API is 
+deprecated. Please use 
+Object.assign() instead.
+(Use `node --trace-deprecation 
+...` to show where the warning 
+was created)
+ΓêÜ Browser application bundle 
+generation complete.
+
+Warning: C:\Users\lys12\Download
+s\angular-project-main\angular-p
+roject-main\node_modules\@supaba
+se\supabase-js\dist\index.mjs 
+depends on 
+'@supabase/storage-js'. 
+CommonJS or AMD dependencies 
+can cause optimization bailouts.
+For more info see: https://angul
+ar.io/guide/build#configuring-co
+mmonjs-dependencies
+
+Warning: C:\Users\lys12\Download
+s\angular-project-main\angular-p
+roject-main\node_modules\@supaba
+se\supabase-js\dist\index.mjs 
+depends on 
+'@supabase/realtime-js'. 
+CommonJS or AMD dependencies 
+can cause optimization bailouts.
+For more info see: https://angul
+ar.io/guide/build#configuring-co
+mmonjs-dependencies
+
+Warning: C:\Users\lys12\Download
+s\angular-project-main\angular-p
+roject-main\node_modules\@supaba
+se\supabase-js\dist\index.mjs 
+depends on 
+'@supabase/functions-js'. 
+CommonJS or AMD dependencies 
+can cause optimization bailouts.
+For more info see: https://angul
+ar.io/guide/build#configuring-co
+mmonjs-dependencies
+
+Warning: C:\Users\lys12\Download
+s\angular-project-main\angular-p
+roject-main\node_modules\@supaba
+se\supabase-js\dist\index.mjs 
+depends on '@supabase/auth-js'. 
+CommonJS or AMD dependencies 
+can cause optimization bailouts.
+For more info see: https://angul
+ar.io/guide/build#configuring-co
+mmonjs-dependencies
+
+
+
+Error: src/app/services/auth.ser
+vice.ts:168:22 - error TS2339: 
+Property 'error' does not exist 
+on type 'unknown'.
+
+168         if (response.error) 
+throw response.error;
+                         ~~~~~
+
+
+Error: src/app/services/auth.ser
+vice.ts:168:44 - error TS2339: 
+Property 'error' does not exist 
+on type 'unknown'.
+
+168         if (response.error) 
+throw response.error;
+                                
+               ~~~~~
+
+
+Error: src/app/services/auth.ser
+vice.ts:48:22 - error TS2339: 
+Property 'error' does not exist 
+on type 'unknown'.
+
+48         if (response.error) {
+                        ~~~~~
+
+
+Error: src/app/services/auth.ser
+vice.ts:49:26 - error TS2339: 
+Property 'error' does not exist 
+on type 'unknown'.
+
+49           throw 
+response.error;
+                            
+~~~~~
+
+
+Error: src/app/services/auth.ser
+vice.ts:52:27 - error TS2339: 
+Property 'data' does not exist 
+on type 'unknown'.
+
+52           token: response.dat
+a.session.access_token,
+                             
+~~~~
+
+
+Error: src/app/services/auth.ser
+vice.ts:53:32 - error TS2339: 
+Property 'data' does not exist 
+on type 'unknown'.
+
+53           expiration: respons
+e.data.session.expires_at?.toStr
+ing() || ""
+                                
+  ~~~~
+
+
+Error: src/app/services/auth.ser
+vice.ts:79:22 - error TS2339: 
+Property 'error' does not exist 
+on type 'unknown'.
+
+79         if (response.error) {
+                        ~~~~~
+
+
+Error: src/app/services/auth.ser
+vice.ts:80:26 - [91merror 
+TS2339: Property 'error' does 
+not exist on type 'unknown'.
+
+80           throw 
+response.error;
+                            
+~~~~~
+
+
+Error: src/app/services/auth.ser
+vice.ts:83:27 - error TS2339: 
+Property 'data' does not exist 
+on type 'unknown'.
+
+83           token: response.dat
+a.session?.access_token || "",
+                             
+~~~~
+
+
+Error: src/app/services/auth.ser
+vice.ts:84:32 - error TS2339: 
+Property 'data' does not exist 
+on type 'unknown'.
+
+84           expiration: respons
+e.data.session?.expires_at?.toSt
+ring() || ""
+                                
+  ~~~~
+
+
+Error: src/app/services/supabase
+.service.ts:2:46 - error 
+TS2307: Cannot find module 
+'@supabase/supabase-js' or its 
+corresponding type declarations.
+
+2 import { createClient, 
+SupabaseClient } from 
+'@supabase/supabase-js';
+                                
+               
+~~~~~~~~~~~~~~~~~~~~~~~
+
+
+Error: ./node_modules/@supabase/
+supabase-js/dist/index.mjs 
+161:39-49
+Can't import the named export 
+'AuthClient' from non 
+EcmaScript module (only default 
+export is available)
+    at HarmonyImportSpecifierDep
+endency._getErrors (C:\Users\lys
+12\Downloads\angular-project-mai
+n\angular-project-main\node_modu
+les\webpack\lib\dependencies\Har
+monyImportSpecifierDependency.js
+:88:6)
+    at HarmonyImportSpecifierDep
+endency.getErrors (C:\Users\lys1
+2\Downloads\angular-project-main
+\angular-project-main\node_modul
+es\webpack\lib\dependencies\Harm
+onyImportSpecifierDependency.js:
+68:16)
+    at Compilation.reportDepende
+ncyErrorsAndWarnings (C:\Users\l
+ys12\Downloads\angular-project-m
+ain\angular-project-main\node_mo
+dules\webpack\lib\Compilation.js
+:1463:22)
+    at C:\Users\lys12\Downloads\
+angular-project-main\angular-pro
+ject-main\node_modules\webpack\l
+ib\Compilation.js:1258:10
+    at _next0 (eval at create (C
+:\Users\lys12\Downloads\angular-
+project-main\angular-project-mai
+n\node_modules\webpack\node_modu
+les\tapable\lib\HookCodeFactory.
+js:33:10), <anonymous>:32:1)
+    at eval (eval at create (C:\
+Users\lys12\Downloads\angular-pr
+oject-main\angular-project-main\
+node_modules\webpack\node_module
+s\tapable\lib\HookCodeFactory.js
+:33:10), <anonymous>:45:1)
+    at process.processTicksAndRe
+jections (node:internal/process/
+task_queues:105:5)
+ @ ./src/app/services/supabase.s
+ervice.ts
+ @ ./src/app/services/auth.servi
+ce.ts
+ @ ./src/app/components/navi/nav
+i.component.ts
+ @ ./src/app/app.module.ts
+ @ ./src/main.ts
+ @ multi ./src/main.ts
+
+Error: ./node_modules/@supabase/
+supabase-js/dist/index.mjs 
+243:13-28
+Can't import the named export 
+'FunctionsClient' from non 
+EcmaScript module (only default 
+export is available)
+    at HarmonyImportSpecifierDep
+endency._getErrors (C:\Users\lys
+12\Downloads\angular-project-mai
+n\angular-project-main\node_modu
+les\webpack\lib\dependencies\Har
+monyImportSpecifierDependency.js
+:88:6)
+    at HarmonyImportSpecifierDep
+endency.getErrors (C:\Users\lys1
+2\Downloads\angular-project-main
+\angular-project-main\node_modul
+es\webpack\lib\dependencies\Harm
+onyImportSpecifierDependency.js:
+68:16)
+    at Compilation.reportDepende
+ncyErrorsAndWarnings (C:\Users\l
+ys12\Downloads\angular-project-m
+ain\angular-project-main\node_mo
+dules\webpack\lib\Compilation.js
+:1463:22)
+    at C:\Users\lys12\Downloads\
+angular-project-main\angular-pro
+ject-main\node_modules\webpack\l
+ib\Compilation.js:1258:10
+    at _next0 (eval at create (C
+:\Users\lys12\Downloads\angular-
+project-main\angular-project-mai
+n\node_modules\webpack\node_modu
+les\tapable\lib\HookCodeFactory.
+js:33:10), <anonymous>:32:1)
+    at eval (eval at create (C:\
+Users\lys12\Downloads\angular-pr
+oject-main\angular-project-main\
+node_modules\webpack\node_module
+s\tapable\lib\HookCodeFactory.js
+:33:10), <anonymous>:45:1)
+    at process.processTicksAndRe
+jections (node:internal/process/
+task_queues:105:5)
+ @ ./src/app/services/supabase.s
+ervice.ts
+ @ ./src/app/services/auth.servi
+ce.ts
+ @ ./src/app/components/navi/nav
+i.component.ts
+ @ ./src/app/app.module.ts
+ @ ./src/main.ts
+ @ multi ./src/main.ts
+
+Error: ./node_modules/@supabase/
+supabase-js/dist/index.mjs 
+231:18-33
+Can't import the named export 
+'PostgrestClient' from non 
+EcmaScript module (only default 
+export is available)
+    at HarmonyImportSpecifierDep
+endency._getErrors (C:\Users\lys
+12\Downloads\angular-project-mai
+n\angular-project-main\node_modu
+les\webpack\lib\dependencies\Har
+monyImportSpecifierDependency.js
+:88:6)
+    at HarmonyImportSpecifierDep
+endency.getErrors (C:\Users\lys1
+2\Downloads\angular-project-main
+\angular-project-main\node_modul
+es\webpack\lib\dependencies\Harm
+onyImportSpecifierDependency.js:
+68:16)
+    at Compilation.reportDepende
+ncyErrorsAndWarnings (C:\Users\l
+ys12\Downloads\angular-project-m
+ain\angular-project-main\node_mo
+dules\webpack\lib\Compilation.js
+:1463:22)
+    at C:\Users\lys12\Downloads\
+angular-project-main\angular-pro
+ject-main\node_modules\webpack\l
+ib\Compilation.js:1258:10
+    at _next0 (eval at create (C
+:\Users\lys12\Downloads\angular-
+project-main\angular-project-mai
+n\node_modules\webpack\node_modu
+les\tapable\lib\HookCodeFactory.
+js:33:10), <anonymous>:32:1)
+    at eval (eval at create (C:\
+Users\lys12\Downloads\angular-pr
+oject-main\angular-project-main\
+node_modules\webpack\node_module
+s\tapable\lib\HookCodeFactory.js
+:33:10), <anonymous>:45:1)
+    at process.processTicksAndRe
+jections (node:internal/process/
+task_queues:105:5)
+ @ ./src/app/services/supabase.s
+ervice.ts
+ @ ./src/app/services/auth.servi
+ce.ts
+ @ ./src/app/components/navi/nav
+i.component.ts
+ @ ./src/app/app.module.ts
+ @ ./src/main.ts
+ @ multi ./src/main.ts
+
+Error: ./node_modules/@supabase/
+supabase-js/dist/index.mjs 
+357:13-27
+Can't import the named export 
+'RealtimeClient' from non 
+EcmaScript module (only default 
+export is available)
+    at HarmonyImportSpecifierDep
+endency._getErrors (C:\Users\lys
+12\Downloads\angular-project-mai
+n\angular-project-main\node_modu
+les\webpack\lib\dependencies\Har
+monyImportSpecifierDependency.js
+:88:6)
+    at HarmonyImportSpecifierDep
+endency.getErrors (C:\Users\lys1
+2\Downloads\angular-project-main
+\angular-project-main\node_modul
+es\webpack\lib\dependencies\Harm
+onyImportSpecifierDependency.js:
+68:16)
+    at Compilation.reportDepende
+ncyErrorsAndWarnings (C:\Users\l
+ys12\Downloads\angular-project-m
+ain\angular-project-main\node_mo
+dules\webpack\lib\Compilation.js
+:1463:22)
+    at C:\Users\lys12\Downloads\
+angular-project-main\angular-pro
+ject-main\node_modules\webpack\l
+ib\Compilation.js:1258:10
+    at _next0 (eval at create (C
+:\Users\lys12\Downloads\angular-
+project-main\angular-project-mai
+n\node_modules\webpack\node_modu
+les\tapable\lib\HookCodeFactory.
+js:33:10), <anonymous>:32:1)
+    at eval (eval at create (C:\
+Users\lys12\Downloads\angular-pr
+oject-main\angular-project-main\
+node_modules\webpack\node_module
+s\tapable\lib\HookCodeFactory.js
+:33:10), <anonymous>:45:1)
+    at process.processTicksAndRe
+jections (node:internal/process/
+task_queues:105:5)
+ @ ./src/app/services/supabase.s
+ervice.ts
+ @ ./src/app/services/auth.servi
+ce.ts
+ @ ./src/app/components/navi/nav
+i.component.ts
+ @ ./src/app/app.module.ts
+ @ ./src/main.ts
+ @ multi ./src/main.ts
+
+Error: ./node_modules/@supabase/
+supabase-js/dist/index.mjs 
+236:21-34
+Can't import the named export 
+'StorageClient' from non 
+EcmaScript module (only default 
+export is available)
+    at HarmonyImportSpecifierDep
+endency._getErrors (C:\Users\lys
+12\Downloads\angular-project-mai
+n\angular-project-main\node_modu
+les\webpack\lib\dependencies\Har
+monyImportSpecifierDependency.js
+:88:6)
+    at HarmonyImportSpecifierDep
+endency.getErrors (C:\Users\lys1
+2\Downloads\angular-project-main
+\angular-project-main\node_modul
+es\webpack\lib\dependencies\Harm
+onyImportSpecifierDependency.js:
+68:16)
+    at Compilation.reportDepende
+ncyErrorsAndWarnings (C:\Users\l
+ys12\Downloads\angular-project-m
+ain\angular-project-main\node_mo
+dules\webpack\lib\Compilation.js
+:1463:22)
+    at C:\Users\lys12\Downloads\
+angular-project-main\angular-pro
+ject-main\node_modules\webpack\l
+ib\Compilation.js:1258:10
+    at _next0 (eval at create (C
+:\Users\lys12\Downloads\angular-
+project-main\angular-project-mai
+n\node_modules\webpack\node_modu
+les\tapable\lib\HookCodeFactory.
+js:33:10), <anonymous>:32:1)
+    at eval (eval at create (C:\
+Users\lys12\Downloads\angular-pr
+oject-main\angular-project-main\
+node_modules\webpack\node_module
+s\tapable\lib\HookCodeFactory.js
+:33:10), <anonymous>:45:1)
+    at process.processTicksAndRe
+jections (node:internal/process/
+task_queues:105:5)
+ @ ./src/app/services/supabase.s
+ervice.ts
+ @ ./src/app/services/auth.servi
+ce.ts
+ @ ./src/app/components/navi/nav
+i.component.ts
+ @ ./src/app/app.module.ts
+ @ ./src/main.ts
+ @ multi ./src/main.ts
+
+Error: ./node_modules/@supabase/
+supabase-js/dist/index.mjs 
+404:0-150
+Can't reexport the named export 
+'FunctionRegion' from non 
+EcmaScript module (only default 
+export is available)
+    at HarmonyExportImportedSpec
+ifierDependency._getErrors (C:\U
+sers\lys12\Downloads\angular-pro
+ject-main\angular-project-main\n
+ode_modules\webpack\lib\dependen
+cies\HarmonyExportImportedSpecif
+ierDependency.js:374:6)
+    at HarmonyExportImportedSpec
+ifierDependency.getErrors (C:\Us
+ers\lys12\Downloads\angular-proj
+ect-main\angular-project-main\no
+de_modules\webpack\lib\dependenc
+ies\HarmonyExportImportedSpecifi
+erDependency.js:354:16)
+    at Compilation.reportDepende
+ncyErrorsAndWarnings (C:\Users\l
+ys12\Downloads\angular-project-m
+ain\angular-project-main\node_mo
+dules\webpack\lib\Compilation.js
+:1463:22)
+    at C:\Users\lys12\Downloads\
+angular-project-main\angular-pro
+ject-main\node_modules\webpack\l
+ib\Compilation.js:1258:10
+    at _next0 (eval at create (C
+:\Users\lys12\Downloads\angular-
+project-main\angular-project-mai
+n\node_modules\webpack\node_modu
+les\tapable\lib\HookCodeFactory.
+js:33:10), <anonymous>:32:1)
+    at eval (eval at create (C:\
+Users\lys12\Downloads\angular-pr
+oject-main\angular-project-main\
+node_modules\webpack\node_module
+s\tapable\lib\HookCodeFactory.js
+:33:10), <anonymous>:45:1)
+    at process.processTicksAndRe
+jections (node:internal/process/
+task_queues:105:5)
+ @ ./src/app/services/supabase.s
+ervice.ts
+ @ ./src/app/services/auth.servi
+ce.ts
+ @ ./src/app/components/navi/nav
+i.component.ts
+ @ ./src/app/app.module.ts
+ @ ./src/main.ts
+ @ multi ./src/main.ts
+
+Error: ./node_modules/@supabase/
+supabase-js/dist/index.mjs 
+404:0-150
+Can't reexport the named export 
+'FunctionsError' from non 
+EcmaScript module (only default 
+export is available)
+    at HarmonyExportImportedSpec
+ifierDependency._getErrors (C:\U
+sers\lys12\Downloads\angular-pro
+ject-main\angular-project-main\n
+ode_modules\webpack\lib\dependen
+cies\HarmonyExportImportedSpecif
+ierDependency.js:374:6)
+    at HarmonyExportImportedSpec
+ifierDependency.getErrors (C:\Us
+ers\lys12\Downloads\angular-proj
+ect-main\angular-project-main\no
+de_modules\webpack\lib\dependenc
+ies\HarmonyExportImportedSpecifi
+erDependency.js:354:16)
+    at Compilation.reportDepende
+ncyErrorsAndWarnings (C:\Users\l
+ys12\Downloads\angular-project-m
+ain\angular-project-main\node_mo
+dules\webpack\lib\Compilation.js
+:1463:22)
+    at C:\Users\lys12\Downloads\
+angular-project-main\angular-pro
+ject-main\node_modules\webpack\l
+ib\Compilation.js:1258:10
+    at _next0 (eval at create (C
+:\Users\lys12\Downloads\angular-
+project-main\angular-project-mai
+n\node_modules\webpack\node_modu
+les\tapable\lib\HookCodeFactory.
+js:33:10), <anonymous>:32:1)
+    at eval (eval at create (C:\
+Users\lys12\Downloads\angular-pr
+oject-main\angular-project-main\
+node_modules\webpack\node_module
+s\tapable\lib\HookCodeFactory.js
+:33:10), <anonymous>:45:1)
+    at process.processTicksAndRe
+jections (node:internal/process/
+task_queues:105:5)
+ @ ./src/app/services/supabase.s
+ervice.ts
+ @ ./src/app/services/auth.servi
+ce.ts
+ @ ./src/app/components/navi/nav
+i.component.ts
+ @ ./src/app/app.module.ts
+ @ ./src/main.ts
+ @ multi ./src/main.ts
+
+Error: ./node_modules/@supabase/
+supabase-js/dist/index.mjs 
+404:0-150
+Can't reexport the named export 
+'FunctionsFetchError' from non 
+EcmaScript module (only default 
+export is available)
+    at HarmonyExportImportedSpec
+ifierDependency._getErrors (C:\U
+sers\lys12\Downloads\angular-pro
+ject-main\angular-project-main\n
+ode_modules\webpack\lib\dependen
+cies\HarmonyExportImportedSpecif
+ierDependency.js:374:6)
+    at HarmonyExportImportedSpec
+ifierDependency.getErrors (C:\Us
+ers\lys12\Downloads\angular-proj
+ect-main\angular-project-main\no
+de_modules\webpack\lib\dependenc
+ies\HarmonyExportImportedSpecifi
+erDependency.js:354:16)
+    at Compilation.reportDepende
+ncyErrorsAndWarnings (C:\Users\l
+ys12\Downloads\angular-project-m
+ain\angular-project-main\node_mo
+dules\webpack\lib\Compilation.js
+:1463:22)
+    at C:\Users\lys12\Downloads\
+angular-project-main\angular-pro
+ject-main\node_modules\webpack\l
+ib\Compilation.js:1258:10
+    at _next0 (eval at create (C
+:\Users\lys12\Downloads\angular-
+project-main\angular-project-mai
+n\node_modules\webpack\node_modu
+les\tapable\lib\HookCodeFactory.
+js:33:10), <anonymous>:32:1)
+    at eval (eval at create (C:\
+Users\lys12\Downloads\angular-pr
+oject-main\angular-project-main\
+node_modules\webpack\node_module
+s\tapable\lib\HookCodeFactory.js
+:33:10), <anonymous>:45:1)
+    at process.processTicksAndRe
+jections (node:internal/process/
+task_queues:105:5)
+ @ ./src/app/services/supabase.s
+ervice.ts
+ @ ./src/app/services/auth.servi
+ce.ts
+ @ ./src/app/components/navi/nav
+i.component.ts
+ @ ./src/app/app.module.ts
+ @ ./src/main.ts
+ @ multi ./src/main.ts
+
+Error: ./node_modules/@supabase/
+supabase-js/dist/index.mjs 
+404:0-150
+Can't reexport the named export 
+'FunctionsHttpError' from non 
+EcmaScript module (only default 
+export is available)
+    at HarmonyExportImportedSpec
+ifierDependency._getErrors (C:\U
+sers\lys12\Downloads\angular-pro
+ject-main\angular-project-main\n
+ode_modules\webpack\lib\dependen
+cies\HarmonyExportImportedSpecif
+ierDependency.js:374:6)
+    at HarmonyExportImportedSpec
+ifierDependency.getErrors (C:\Us
+ers\lys12\Downloads\angular-proj
+ect-main\angular-project-main\no
+de_modules\webpack\lib\dependenc
+ies\HarmonyExportImportedSpecifi
+erDependency.js:354:16)
+    at Compilation.reportDepende
+ncyErrorsAndWarnings (C:\Users\l
+ys12\Downloads\angular-project-m
+ain\angular-project-main\node_mo
+dules\webpack\lib\Compilation.js
+:1463:22)
+    at C:\Users\lys12\Downloads\
+angular-project-main\angular-pro
+ject-main\node_modules\webpack\l
+ib\Compilation.js:1258:10
+    at _next0 (eval at create (C
+:\Users\lys12\Downloads\angular-
+project-main\angular-project-mai
+n\node_modules\webpack\node_modu
+les\tapable\lib\HookCodeFactory.
+js:33:10), <anonymous>:32:1)
+    at eval (eval at create (C:\
+Users\lys12\Downloads\angular-pr
+oject-main\angular-project-main\
+node_modules\webpack\node_module
+s\tapable\lib\HookCodeFactory.js
+:33:10), <anonymous>:45:1)
+    at process.processTicksAndRe
+jections (node:internal/process/
+task_queues:105:5)
+ @ ./src/app/services/supabase.s
+ervice.ts
+ @ ./src/app/services/auth.servi
+ce.ts
+ @ ./src/app/components/navi/nav
+i.component.ts
+ @ ./src/app/app.module.ts
+ @ ./src/main.ts
+ @ multi ./src/main.ts
+
+Error: ./node_modules/@supabase/
+supabase-js/dist/index.mjs 
+404:0-150
+Can't reexport the named export 
+'FunctionsRelayError' from non 
+EcmaScript module (only default 
+export is available)
+    at HarmonyExportImportedSpec
+ifierDependency._getErrors (C:\U
+sers\lys12\Downloads\angular-pro
+ject-main\angular-project-main\n
+ode_modules\webpack\lib\dependen
+cies\HarmonyExportImportedSpecif
+ierDependency.js:374:6)
+    at HarmonyExportImportedSpec
+ifierDependency.getErrors (C:\Us
+ers\lys12\Downloads\angular-proj
+ect-main\angular-project-main\no
+de_modules\webpack\lib\dependenc
+ies\HarmonyExportImportedSpecifi
+erDependency.js:354:16)
+    at Compilation.reportDepende
+ncyErrorsAndWarnings (C:\Users\l
+ys12\Downloads\angular-project-m
+ain\angular-project-main\node_mo
+dules\webpack\lib\Compilation.js
+:1463:22)
+    at C:\Users\lys12\Downloads\
+angular-project-main\angular-pro
+ject-main\node_modules\webpack\l
+ib\Compilation.js:1258:10
+    at _next0 (eval at create (C
+:\Users\lys12\Downloads\angular-
+project-main\angular-project-mai
+n\node_modules\webpack\node_modu
+les\tapable\lib\HookCodeFactory.
+js:33:10), <anonymous>:32:1)
+    at eval (eval at create (C:\
+Users\lys12\Downloads\angular-pr
+oject-main\angular-project-main\
+node_modules\webpack\node_module
+s\tapable\lib\HookCodeFactory.js
+:33:10), <anonymous>:45:1)
+    at process.processTicksAndRe
+jections (node:internal/process/
+task_queues:105:5)
+ @ ./src/app/services/supabase.s
+ervice.ts
+ @ ./src/app/services/auth.servi
+ce.ts
+ @ ./src/app/components/navi/nav
+i.component.ts
+ @ ./src/app/app.module.ts
+ @ ./src/main.ts
+ @ multi ./src/main.ts
+
+Error: ./node_modules/@supabase/
+supabase-js/dist/index.mjs 
+404:0-150
+Can't reexport the named export 
+'PostgrestError' from non 
+EcmaScript module (only default 
+export is available)
+    at HarmonyExportImportedSpec
+ifierDependency._getErrors (C:\U
+sers\lys12\Downloads\angular-pro
+ject-main\angular-project-main\n
+ode_modules\webpack\lib\dependen
+cies\HarmonyExportImportedSpecif
+ierDependency.js:374:6)
+    at HarmonyExportImportedSpec
+ifierDependency.getErrors (C:\Us
+ers\lys12\Downloads\angular-proj
+ect-main\angular-project-main\no
+de_modules\webpack\lib\dependenc
+ies\HarmonyExportImportedSpecifi
+erDependency.js:354:16)
+    at Compilation.reportDepende
+ncyErrorsAndWarnings (C:\Users\l
+ys12\Downloads\angular-project-m
+ain\angular-project-main\node_mo
+dules\webpack\lib\Compilation.js
+:1463:22)
+    at C:\Users\lys12\Downloads\
+angular-project-main\angular-pro
+ject-main\node_modules\webpack\l
+ib\Compilation.js:1258:10
+    at _next0 (eval at create (C
+:\Users\lys12\Downloads\angular-
+project-main\angular-project-mai
+n\node_modules\webpack\node_modu
+les\tapable\lib\HookCodeFactory.
+js:33:10), <anonymous>:32:1)
+    at eval (eval at create (C:\
+Users\lys12\Downloads\angular-pr
+oject-main\angular-project-main\
+node_modules\webpack\node_module
+s\tapable\lib\HookCodeFactory.js
+:33:10), <anonymous>:45:1)
+    at process.processTicksAndRe
+jections (node:internal/process/
+task_queues:105:5)
+ @ ./src/app/services/supabase.s
+ervice.ts
+ @ ./src/app/services/auth.servi
+ce.ts
+ @ ./src/app/components/navi/nav
+i.component.ts
+ @ ./src/app/app.module.ts
+ @ ./src/main.ts
+ @ multi ./src/main.ts
+
+Error: ./node_modules/iceberg-js
+/dist/index.mjs 10:144
+Module parse failed: Unexpected 
+token (10:144)
+File was processed with these 
+loaders:
+ * ./node_modules/@angular-devki
+t/build-angular/src/babel/webpac
+k-loader.js
+You may need an additional 
+loader to handle the result of 
+these loaders.
+|     this.icebergCode = 
+opts.icebergCode;
+|     this.details = 
+opts.details;
+>     this.isCommitStateUnknown 
+= opts.icebergType === 
+"CommitStateUnknownException" 
+|| [500, 502, 
+504].includes(opts.status) && op
+ts.icebergType?.includes("Commit
+State") === true;
+|   }
+|   /**
+ @ ./node_modules/@supabase/stor
+age-js/dist/index.cjs 1:17-38
+ @ ./node_modules/@supabase/supa
+base-js/dist/index.mjs
+ @ ./src/app/services/supabase.s
+ervice.ts
+ @ ./src/app/services/auth.servi
+ce.ts
+ @ ./src/app/components/navi/nav
+i.component.ts
+ @ ./src/app/app.module.ts
+ @ ./src/main.ts
+ @ multi ./src/main.ts
+
+

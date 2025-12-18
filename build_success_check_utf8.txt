@@ -1,0 +1,42 @@
+﻿node.exe : - Generating browser 
+application bundles...
+At C:\Program 
+Files\nodejs\npx.ps1:29 char:3
++   & $NODE_EXE $NPX_CLI_JS 
+$args
++   
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : N 
+   otSpecified: (- Generating   
+  br...tion bundles...:String   
+ ) [], RemoteException
+    + FullyQualifiedErrorId : N 
+   ativeCommandError
+ 
+(node:17204) [DEP0060] 
+DeprecationWarning: The 
+`util._extend` API is 
+deprecated. Please use 
+Object.assign() instead.
+(Use `node --trace-deprecation 
+...` to show where the warning 
+was created)
+ΓêÜ Browser application bundle 
+generation complete.
+- Copying assets...
+ΓêÜ Copying assets complete.
+- Generating index html...
+ΓêÜ Index html generation 
+complete.
+
+Initial Chunk Files | Names         |      Size
+vendor.js           | vendor        |   3.14 MB
+styles.css          | styles        | 912.09 kB
+main.js             | main          | 455.84 kB
+scripts.js          | scripts       | 147.76 kB
+polyfills.js        | polyfills     | 128.55 kB
+runtime.js          | runtime       |   6.15 kB
+
+| Initial Total |   4.75 MB
+
+Build at: 2025-12-18T07:01:44.616Z - Hash: 0a1e4f12645182742725 - Time: 17063ms

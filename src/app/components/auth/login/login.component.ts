@@ -31,30 +31,22 @@ export class LoginComponent implements OnInit {
 
 
   login() {
-    let isSessionActive = localStorage.getItem("token")
-    if (
-      isSessionActive == "0" ||
-      isSessionActive == undefined ||
-      !(isSessionActive == "1")
-    ) {
-      if (this.loginForm.valid) {
-        let loginModel = Object.assign({}, this.loginForm.value)
-        this.authService.login(loginModel).subscribe(response => {
-          this.toasterService.success(response.message, "Success");
-          localStorage.setItem("token", response.data.token);
-          this.dataLoaded = true;
+    if (this.loginForm.valid) {
+      let loginModel = Object.assign({}, this.loginForm.value)
+      this.authService.login(loginModel).subscribe(response => {
+        this.toasterService.success(response.message, "Success");
+        localStorage.setItem("token", response.data.token);
+        this.authService.userDetailFromToken();
+        this.dataLoaded = true;
+        this.router.navigate(['/home']).then(() => {
           this.authService.onRefresh();
-          this.router.navigate(['/home']);
-        }
-          , responseError => {
-
-            this.toasterService.error(responseError.error, "Hata!")
-          })
-      }
-      else {
-        this.toasterService.error("Please fill in all fields", "Warning!")
-      }
+        });
+      }, responseError => {
+        this.toasterService.error(responseError.error, "Error!")
+      })
     }
-
+    else {
+      this.toasterService.error("Please fill in all fields", "Warning!")
+    }
   }
 }

@@ -13,11 +13,11 @@ import { UserService } from 'src/app/services/user.service';
 export class UserComponent implements OnInit {
   userForm: FormGroup;
   user: User;
-  lastName=this.authService.name;
-  firstName=this.authService.surname;
-  email=this.authService.email;
+  get lastName() { return this.authService.surname; }
+  get firstName() { return this.authService.name; }
+  get email() { return this.authService.email; }
   constructor(
-    private authService:AuthService,
+    private authService: AuthService,
     private userService: UserService,
     private toastrService: ToastrService,
   ) { }
@@ -26,7 +26,7 @@ export class UserComponent implements OnInit {
     this.getUser();
   }
 
-  getUser(){
+  getUser() {
     this.userService.getbyid(this.authService.userId).subscribe(response => {
       this.user = response.data
       this.userForm.patchValue(response.data)
