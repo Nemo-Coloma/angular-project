@@ -10,42 +10,42 @@ import { BrandService } from 'src/app/services/brand.service';
   styleUrls: ['./brand-add.component.css']
 })
 export class BrandAddComponent implements OnInit {
-  brands:Brand[];
-  brandAddForm:FormGroup;
+  brands: Brand[];
+  brandAddForm: FormGroup;
   constructor(
-    private brandService:BrandService,
-    private toastrService:ToastrService,
-    private formBuilder:FormBuilder
+    private brandService: BrandService,
+    private toastrService: ToastrService,
+    private formBuilder: FormBuilder
   ) { }
 
   ngOnInit(): void {
     this.createCarAddForm();
   }
 
-  createCarAddForm(){
-    this.brandAddForm=this.formBuilder.group({
-     brandName:["",Validators.required]
-  
+  createCarAddForm() {
+    this.brandAddForm = this.formBuilder.group({
+      brandName: ["", Validators.required]
+
     })
   }
 
-  addBrand(){
-    if(this.brandAddForm.valid){
-      let carModel = Object.assign({},this.brandAddForm.value);
+  addBrand() {
+    if (this.brandAddForm.valid) {
+      let carModel = Object.assign({}, this.brandAddForm.value);
       this.brandService.addBrand(carModel).subscribe(
         response => {
-        this.toastrService.success(response.message,"Başarılı")
+          this.toastrService.success(response.message, "Success")
         },
         responseError => {
-        if(responseError.error.ValidationErrors.length > 0) {
-          for(let i=0;i<responseError.error.ValidationErrors.length;i++) {
-            this.toastrService.error(responseError.error.ValidationErrors[i].ErrorMessage,"Doğrulama Hatası")
+          if (responseError.error.ValidationErrors.length > 0) {
+            for (let i = 0; i < responseError.error.ValidationErrors.length; i++) {
+              this.toastrService.error(responseError.error.ValidationErrors[i].ErrorMessage, "Validation Error")
+            }
           }
-        }
-      })
+        })
     }
     else {
-      this.toastrService.error("Formunuz Eksik","Dikkat!")
+      this.toastrService.error("Formunuz Eksik", "Dikkat!")
     }
   }
 

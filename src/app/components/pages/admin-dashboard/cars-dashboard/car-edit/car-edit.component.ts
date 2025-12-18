@@ -130,7 +130,7 @@ export class CarEditComponent implements OnInit {
         if (responseError.error.Errors.length > 0) {
           for (let i = 0; i < responseError.error.ValidationErrors.length; i++) {
             const element = responseError.error.ValidationErrors[i];
-            this.toastrService.error(element.ErrorMessage, "Araç Güncellenemedi");
+            this.toastrService.error(element.ErrorMessage, "Car Could Not Be Updated");
           }
         }
       });

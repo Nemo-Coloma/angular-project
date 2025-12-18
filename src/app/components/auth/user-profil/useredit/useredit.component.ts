@@ -19,7 +19,7 @@ export class UsereditComponent implements OnInit {
   user: User;
   customer: Customer;
   constructor(
-    private formBuilder:FormBuilder,
+    private formBuilder: FormBuilder,
     private toastrService: ToastrService,
     private authService: AuthService
   ) { }
@@ -28,25 +28,25 @@ export class UsereditComponent implements OnInit {
     this.createPasswordUpdateForm();
   }
 
-  createPasswordUpdateForm(){
+  createPasswordUpdateForm() {
     this.passwordUpdateForm = this.formBuilder.group({
       oldPassword: ["", Validators.required],
       newPassword: ["", Validators.required],
     })
   }
 
-  updatepassord(){
-    if(this.passwordUpdateForm.valid){
-      this.passwordUpdateForm.addControl("userId",new FormControl(this.authService.getCurrentUserId()))
-      let passwordModel:PasswordChangeModel = Object.assign({},this.passwordUpdateForm.value)
+  updatepassord() {
+    if (this.passwordUpdateForm.valid) {
+      this.passwordUpdateForm.addControl("userId", new FormControl(this.authService.getCurrentUserId()))
+      let passwordModel: PasswordChangeModel = Object.assign({}, this.passwordUpdateForm.value)
       this.authService.changePassword(passwordModel).subscribe(response => {
-        this.toastrService.success(response.message,"Başarılı")
-      },responseError => {
-        this.toastrService.error(responseError.error.message,"Hata")
+        this.toastrService.success(response.message, "Success")
+      }, responseError => {
+        this.toastrService.error(responseError.error.message, "Error")
 
       })
-    }else{
-      this.toastrService.error("Tüm alanları doldurmanız gerekli","Hata")
+    } else {
+      this.toastrService.error("Tüm alanları doldurmanız gerekli", "Hata")
     }
   }
 

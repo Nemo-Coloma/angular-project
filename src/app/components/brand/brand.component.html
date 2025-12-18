@@ -2,26 +2,18 @@
   <span class="visually-hidden"></span>
 </div> -->
 
-<div class="" >
+<div class="">
   <label for="brandFilter" class="form-label"></label>
-  <input type="text" [(ngModel)]="brandFilter" class="form-control" id="brandFilter" 
-  placeholder="arama ifadesi giriniz">
+  <input type="text" [(ngModel)]="brandFilter" class="form-control" id="brandFilter" placeholder="enter search text">
 </div>
 
 <ul *ngIf="dataLoaded == true" class="list-group ">
-    <li 
-      routerLink="/cars" [ngClass]="getAllBrandClass()"
-     >
-        Tüm Markalar
-    </li>
-    <li (click)="setCurrentBrand(brand)" 
-    
-        routerLink="/cars/brand/{{brand.brandId}}"
-        *ngFor="let brand of brands |brandFilter:brandFilter" 
-        
-        [class]="getCurrentBrandClass(brand)" >
-        {{brand.brandName}}
-    </li>
+  <li routerLink="/cars" [ngClass]="getAllBrandClass()">
+    All Brands
+  </li>
+  <li (click)="setCurrentBrand(brand)" routerLink="/cars/brand/{{brand.brandId}}"
+    *ngFor="let brand of brands |brandFilter:brandFilter" [class]="getCurrentBrandClass(brand)">
+    {{brand.brandName}}
+  </li>
 
 </ul>
-
