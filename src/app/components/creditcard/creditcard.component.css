@@ -82,7 +82,7 @@ input {
     width: 60px;
 }
 
-/* CREDIT CARD IMAGE STYLING */
+
 .preload * {
     -webkit-transition: none !important;
     -moz-transition: none !important;
@@ -129,7 +129,7 @@ input {
     float:right;
 }
 
-/* CHANGEABLE CARD ELEMENTS */
+
 .creditcard .lightcolor,
 .creditcard .darkcolor {
     -webkit-transition: fill .5s;
@@ -208,7 +208,7 @@ input {
     fill: #616161;
 }
 
-/* FRONT OF CARD */
+
 #svgname {
     text-transform: uppercase;
 }
@@ -261,7 +261,7 @@ input {
     fill: #4C4C4C;
 }
 
-/* BACK OF CARD */
+
 #cardback .st0 {
     fill: none;
     stroke: #0F0F0F;
@@ -317,7 +317,7 @@ input {
     font-size: 37.769px;
 }
 
-/* FLIP ANIMATION */
+
 .container {
     perspective: 1000px;
 }

@@ -12,54 +12,54 @@ import { RentalService } from 'src/app/services/rental.service';
   styleUrls: ['./rental.component.css']
 })
 export class RentalComponent implements OnInit {
-  car:Car;
-  startDate:Date;
-  endDate:Date;
-  rentPrice:number = 0;
-  rental:Rental;
-  rentable:Boolean = true;
+  car: Car;
+  startDate: Date;
+  endDate: Date;
+  rentPrice: number = 0;
+  rental: Rental;
+  rentable: Boolean = true;
   constructor(
-    private rentalService:RentalService,
-    private carService:CarService,
-    private activatedRoute:ActivatedRoute,
-    private router:Router,
-    private toastrService:ToastrService
+    private rentalService: RentalService,
+    private carService: CarService,
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
+    private toastrService: ToastrService
   ) { }
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe(params=>{
-      if(params["carId"]){
+    this.activatedRoute.params.subscribe(params => {
+      if (params["carId"]) {
         this.getCarDetail(params["carId"])
       }
     })
   }
 
-  getCarDetail(carId:number) {
+  getCarDetail(carId: number) {
     this.carService.getCarDetail(carId).subscribe((response) => {
       this.car = response.data[0];
     });
   }
 
-  addRental(rental:Rental){
+  addRental(rental: Rental) {
 
-    if(this.rentable=true){
+    if (this.rentable = true) {
       this.rental = this.rental;
-     
+
       this.router.navigate(['/creditcard/', JSON.stringify(this.rental)]);
-      this.toastrService.info("Kredi kartı ödeme sayfasına yönlendiriliyor","Yönlendiriliyor")
-    }else{
-      this.toastrService.error("Bu tarihler arasında arabayı kiralayamazsınız","Zaten kiralanmış")
-      console.log("Bu tarihler arasında arabayı kiralayamazsınız","Zaten kiralanmış")
+      this.toastrService.info("Kredi kartı ödeme sayfasına yönlendiriliyor", "Yönlendiriliyor")
+    } else {
+      this.toastrService.error("You cannot rent the car between these dates", "Already rented")
+      console.log("You cannot rent the car between these dates", "Already rented")
     }
   }
 
-  setRentable(){
-    this.rentalService.isRentable(this.rental).subscribe(response=>{
+  setRentable() {
+    this.rentalService.isRentable(this.rental).subscribe(response => {
       this.rentable = response.success
     })
   }
 
-  calculatePrice(){
-    if(this.startDate && this.endDate){
+  calculatePrice() {
+    if (this.startDate && this.endDate) {
       let endDate = new Date(this.endDate.toString())
       let startDate = new Date(this.startDate.toString())
       let endDay = Number.parseInt(endDate.getDate().toString())
@@ -68,26 +68,26 @@ export class RentalComponent implements OnInit {
       let startDay = Number.parseInt(startDate.getDate().toString())
       let startMonth = Number.parseInt(startDate.getMonth().toString())
       let startYear = Number.parseInt(startDate.getFullYear().toString())
-      let result =  ((endDay - startDay) + ((endMonth - startMonth)*30) + ((endYear - startYear)*365) + 1) * this.car.dailyPrice
-      if (result>0){
-        this.rental = {carId:this.car.carId,rentDate:this.startDate,returnDate:this.endDate,totalRentPrice:result};
+      let result = ((endDay - startDay) + ((endMonth - startMonth) * 30) + ((endYear - startYear) * 365) + 1) * this.car.dailyPrice
+      if (result > 0) {
+        this.rental = { carId: this.car.carId, rentDate: this.startDate, returnDate: this.endDate, totalRentPrice: result };
         console.log(result)
         this.rentPrice = result
         this.setRentable()
-      }else{
+      } else {
         this.rentPrice = 0
-        this.toastrService.info("Bu tarihler arasında arabayı kiralayamazsınız","!")
+        this.toastrService.info("You cannot rent the car between these dates", "!")
       }
     }
-    else if(this.startDate!){
-   
+    else if (this.startDate!) {
+
     }
-    else if(this.endDate!){
-   
+    else if (this.endDate!) {
+
     }
-    else{
+    else {
       this.rentPrice = 0
-      this.toastrService.info("Bu tarihler arasında arabayı kiralayamazsınız","!")
+      this.toastrService.info("You cannot rent the car between these dates", "!")
       console.log("samet")
     }
   }

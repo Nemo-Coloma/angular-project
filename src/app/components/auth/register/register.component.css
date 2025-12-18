@@ -20,7 +20,7 @@ h2 {
 
 
 
-/* STRUCTURE */
+
 
 .wrapper {
   display: flex;
@@ -54,7 +54,7 @@ h2 {
 
 
 
-/* TABS */
+
 
 h2.inactive {
   color: #cccccc;
@@ -67,7 +67,7 @@ h2.active {
 
 
 
-/* FORM TYPOGRAPHY*/
+
 
 input[type=button], input[type=submit], input[type=reset]  {
   background-color: #56baed;
@@ -135,9 +135,9 @@ input[type=text]:placeholder, input[type=email]:placeholder ,input[type=password
 
 
 
-/* ANIMATIONS */
 
-/* Simple CSS3 Fade-in-down Animation */
+
+
 .fadeInDown {
   -webkit-animation-name: fadeInDown;
   animation-name: fadeInDown;
@@ -173,7 +173,7 @@ input[type=text]:placeholder, input[type=email]:placeholder ,input[type=password
   }
 }
 
-/* Simple CSS3 Fade-in Animation */
+
 @-webkit-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
 @-moz-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
 @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
@@ -217,7 +217,7 @@ input[type=text]:placeholder, input[type=email]:placeholder ,input[type=password
   animation-delay: 1s;
 }
 
-/* Simple CSS3 Fade-in Animation */
+
 .underlineHover:after {
   display: block;
   width: 0;
@@ -237,7 +237,7 @@ input[type=text]:placeholder, input[type=email]:placeholder ,input[type=password
 
 
 
-/* OTHERS */
+
 
 *:focus {
     outline: none;

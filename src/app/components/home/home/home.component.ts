@@ -9,34 +9,34 @@ import { CarService } from 'src/app/services/car.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  imageUrl:string = "https://localhost:44388";
-  cars:Car[]=[];
-  currentImage : CarImage;
-  dataLoaded:boolean = false;
+  imageUrl: string = "https://localhost:44360/Uploads/Images/";
+  cars: Car[] = [];
+  currentImage: CarImage;
+  dataLoaded: boolean = false;
   constructor(
-    private carService:CarService,
+    private carService: CarService,
   ) { }
 
   ngOnInit(): void {
     this.getCars()
   }
-  getCars(){
-    this.carService.getCars().subscribe(response=>{
-      this.cars=response.data.slice(0,6);
-      this.dataLoaded=true;
+  getCars() {
+    this.carService.getCars().subscribe(response => {
+      this.cars = response.data.slice(0, 6);
+      this.dataLoaded = true;
     })
   }
 
-  getCurrentImageClass(car:Car){
-    if(car==this.cars[0]){
+  getCurrentImageClass(car: Car) {
+    if (car == this.cars[0]) {
       return "carousel-item active"
     } else {
       return "carousel-item"
     }
   }
 
-  getButtonClass(car:Car){
-    if(car==this.cars[0]){
+  getButtonClass(car: Car) {
+    if (car == this.cars[0]) {
       return "active"
     } else {
       return ""

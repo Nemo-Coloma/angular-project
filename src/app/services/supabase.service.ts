@@ -16,7 +16,7 @@ export class SupabaseService {
         return this.supabase;
     }
 
-    // Example method to fetch data
+
     async getBrands() {
         const { data, error } = await this.supabase
             .from('brands')
@@ -26,5 +26,5 @@ export class SupabaseService {
         return data;
     }
 
-    // Add more methods as needed for your entities
+
 }

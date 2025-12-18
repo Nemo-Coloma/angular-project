@@ -152,7 +152,7 @@ body {
   .layout_padding2 {
     padding-top: 45px;
     padding-bottom: 45px;
-    background-color: #eb0000;
+    background-color: #000000;
   }
   
   .layout_padding2-top {
@@ -190,15 +190,15 @@ body {
     position: relative;
   }
   
-  /*header section*/
+  
   .hero_area {
     position: relative;
   }
   
   .sub_page .header_section {
     position: unset;
-    background: -webkit-gradient(linear, left top, right top, color-stop(75%, transparent), color-stop(75%, #240a5e));
-    background: linear-gradient(to right, transparent 75%, #240a5e 75%);
+    background: -webkit-gradient(linear, left top, right top, color-stop(75%, transparent), color-stop(75%, #000000));
+    background: linear-gradient(to right, transparent 75%, #000000 75%);
   }
   
   .header_section {
@@ -287,7 +287,7 @@ body {
     z-index: 1;
     top: 0;
     left: 0;
-    background-color: rgba(36, 10, 94, 0.9);
+    background-color: rgba(0, 0, 0, 0.9);
     overflow-x: hidden;
     -webkit-transition: 0.5s;
     transition: 0.5s;
@@ -365,7 +365,7 @@ body {
   .navbar-brand span {
     font-size: 24px;
     font-weight: 700;
-    color: #240a5e;
+    color: #000000;
   }
   
   .custom_nav-container {
@@ -378,7 +378,7 @@ body {
   }
   
   .custom_nav-container .navbar-toggler .navbar-toggler-icon {
-    /* background-image: url('../../../../assets/İmg/menu.png'); */
+    
     background-size: 55px;
   }
   
@@ -392,7 +392,7 @@ body {
     font-size: 16px;
   }
   
-  /*end header section*/
+  
   .slider_section .carousel {
     position: unset;
   }
@@ -418,7 +418,7 @@ body {
     -webkit-box-flex: 1;
         -ms-flex: 1;
             flex: 1;
-    background-color: #240a5e;
+    background-color: #000000;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -453,10 +453,10 @@ body {
   .slider_section .slider_container .detail_container .detail-box a ,.auth{
     display: inline-block;
     padding: 10px 45px;
-    background-color: #f22324;
+    background-color: #000000;
     color: #fefdfc;
     border-radius: 0;
-    border: 1px solid #f22324;
+    border: 1px solid #ffffff;
     text-transform: uppercase;
     margin-top: 35px;
   }
@@ -475,7 +475,7 @@ body {
     -webkit-transform: translateX(-50%);
             transform: translateX(-50%);
     background-repeat: no-repeat;
-    background-color: #240a5e;
+    background-color: #000000;
     background-size: 20px;
     background-position: center;
   }
@@ -578,10 +578,10 @@ body {
   .book_section form .btn-container button {
     display: inline-block;
     padding: 10px 65px;
-    background-color: #240a5e;
+    background-color: #000000;
     color: #fefdfc;
     border-radius: 0;
-    border: 1px solid #240a5e;
+    border: 1px solid #000000;
     margin-top: 25px;
   }
   
@@ -650,10 +650,10 @@ body {
   .car_section .car_container .box .detail-box a {
     display: inline-block;
     padding: 8px 25px;
-    background-color: #f22324;
+    background-color: #000000;
     color: #fefdfc;
     border-radius: #000000;
-    border: 1px solid #f22324;
+    border: 1px solid #ffffff;
     margin-top: 25px;
   }
   
@@ -701,10 +701,10 @@ body {
   .about_section .detail-box a {
     display: inline-block;
     padding: 8px 25px;
-    background-color: #f22324;
+    background-color: #000000;
     color: #fefdfc;
     border-radius: #000000;
-    border: 1px solid #f22324;
+    border: 1px solid #ffffff;
     margin-top: 15px;
   }
   
@@ -742,10 +742,10 @@ body {
   .best_section .book_now .btn-box a {
     display: inline-block;
     padding: 10px 60px;
-    background-color: #f22324;
+    background-color: #000000;
     color: #fefdfc;
     border-radius: #000000;
-    border: 1px solid #f22324;
+    border: 1px solid #ffffff;
   }
   
   .best_section .book_now .btn-box a:hover {
@@ -754,7 +754,7 @@ body {
   }
   
   .rent_section {
-    background-color: #240a5e;
+    background-color: #000000;
   }
   
   .rent_section .heading_container h2 {
@@ -1183,7 +1183,7 @@ body {
     height: 100%;
   }
   
-  /* footer section*/
+  
   .footer_section {
     background-color: #240a5e;
     padding: 20px;

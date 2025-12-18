@@ -60,10 +60,10 @@ const routes: Routes = [
         path: 'cars/edit/:carId',
         component: CarEditComponent,
       },
-      // {
-      //   path: 'cars/edit/images/:carId',
-      //   component: CarImageComponent,
-      // },
+
+
+
+
       {
         path: 'brands',
         component: BrandsDashboardComponent,

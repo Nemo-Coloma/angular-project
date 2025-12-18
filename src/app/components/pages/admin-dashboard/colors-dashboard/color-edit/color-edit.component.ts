@@ -63,7 +63,7 @@ export class ColorEditComponent implements OnInit {
 
 
   deleteColor() {
-    if (window.confirm('Rengi Sildiğine  emin misin?')) {
+    if (window.confirm('Are you sure you want to delete the color?')) {
       let colorModule: Color = {
         colorId: this.color.colorId,
         ...this.colorEditForm.value,

@@ -12,57 +12,57 @@ import { BrandService } from 'src/app/services/brand.service';
 })
 export class BrandEditComponent implements OnInit {
 
-  brand:Brand;
-  brandEditForm : FormGroup;
-  
+  brand: Brand;
+  brandEditForm: FormGroup;
+
   constructor(
-    private formBuilder:FormBuilder,
-    private activatedRoute:ActivatedRoute,
-    private brandService:BrandService,
+    private formBuilder: FormBuilder,
+    private activatedRoute: ActivatedRoute,
+    private brandService: BrandService,
     private toastrService: ToastrService,
-    private router:Router
+    private router: Router
   ) { }
 
   ngOnInit(): void {
     this.createBrandUpdateForm()
-    this.activatedRoute.params.subscribe(params=>{
-      if(params["brandId"]){
+    this.activatedRoute.params.subscribe(params => {
+      if (params["brandId"]) {
         this.getBrandById(params["brandId"])
       }
     })
   }
 
-  createBrandUpdateForm(){
+  createBrandUpdateForm() {
     this.brandEditForm = this.formBuilder.group({
-      brandName: ["",Validators.required]
+      brandName: ["", Validators.required]
     })
   }
 
-  getBrandById(brandId:number){
+  getBrandById(brandId: number) {
     this.brandService.getById(brandId).subscribe((response) => {
       this.brand = response.data;
     });
   }
 
-  updateBrand(){
-    if(this.brandEditForm.valid){      
-      let brandModel = Object.assign({},this.brandEditForm.value)
+  updateBrand() {
+    if (this.brandEditForm.valid) {
+      let brandModel = Object.assign({}, this.brandEditForm.value)
       brandModel.brandId = Number(this.brand.brandId)
-      this.brandService.updateBrand(brandModel).subscribe(response=>{
+      this.brandService.updateBrand(brandModel).subscribe(response => {
         this.toastrService.success(response.message)
-      },responseError=>{
+      }, responseError => {
         this.toastrService.success(responseError.message)
       })
-    }else{
-      this.toastrService.error("Form eksik","Hata")
-    }    
+    } else {
+      this.toastrService.error("Form eksik", "Hata")
+    }
   }
 
 
 
-  
+
   deleteBrand() {
-    if (window.confirm('Marka Sildiğine emin misin?')) {
+    if (window.confirm('Are you sure you want to delete the brand?')) {
       let brandModule: Brand = {
         brandId: this.brand.brandId,
         ...this.brandEditForm.value,

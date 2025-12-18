@@ -12,49 +12,49 @@ import { CarService } from 'src/app/services/car.service';
 })
 export class CarDetailComponent implements OnInit {
 
-  cars:Car[]=[];
-  carImages:CarImage[]=[];
-  currentImage : CarImage;
-  dataLoaded:boolean = false;
-  imageUrl:string = "https://localhost:44388";
-  
+  cars: Car[] = [];
+  carImages: CarImage[] = [];
+  currentImage: CarImage;
+  dataLoaded: boolean = false;
+  imageUrl: string = "https://localhost:44360/Uploads/Images/";
+
   constructor(private carService: CarService,
-    private carImageService: CarImageService, 
-    private activatedRoute:ActivatedRoute,) {}
+    private carImageService: CarImageService,
+    private activatedRoute: ActivatedRoute,) { }
 
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe(params=>{
-      if(params["carId"]){
+    this.activatedRoute.params.subscribe(params => {
+      if (params["carId"]) {
         this.getCarDetail(params["carId"])
-        
+
       }
       this.getImagesByCarId();
     })
   }
 
-  getCarDetail(carId:number) {
+  getCarDetail(carId: number) {
     this.carService.getCarDetail(carId).subscribe((response) => {
       this.cars = response.data;
       this.dataLoaded = true;
     });
   }
-  getImagesByCarId(){
-    
-    this.carImageService.getCarImages(this.activatedRoute.snapshot.params["carId"]).subscribe((response)=>{
-      this.carImages=response.data;      
+  getImagesByCarId() {
+
+    this.carImageService.getCarImages(this.activatedRoute.snapshot.params["carId"]).subscribe((response) => {
+      this.carImages = response.data;
     });
   }
 
-  getCurrentImageClass(image:CarImage){
-    if(image==this.carImages[0]){
+  getCurrentImageClass(image: CarImage) {
+    if (image == this.carImages[0]) {
       return "carousel-item active"
     } else {
       return "carousel-item"
     }
   }
 
-  getButtonClass(image:CarImage){
-    if(image==this.carImages[0]){
+  getButtonClass(image: CarImage) {
+    if (image == this.carImages[0]) {
       return "active"
     } else {
       return ""
