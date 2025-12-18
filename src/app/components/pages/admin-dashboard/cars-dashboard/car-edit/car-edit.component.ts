@@ -26,8 +26,6 @@ export class CarEditComponent implements OnInit {
   selectedBrand: number;
   modelYearList: number[] = [];
 
-  imageUrl = "https://localhost:44360/Uploads/Images/";
-
   constructor(
     private carService: CarService,
     private activatedRoute: ActivatedRoute,
@@ -146,7 +144,7 @@ export class CarEditComponent implements OnInit {
         carId: this.car.carId,
         ...this.carUpdateForm.value,
       };
-      this.carService.deletCar(carModule).subscribe(
+      this.carService.deleteCar(carModule).subscribe(
         (response) => {
           this.toastrService.success(response.message);
           this.router.navigate(['admin', 'cars']);

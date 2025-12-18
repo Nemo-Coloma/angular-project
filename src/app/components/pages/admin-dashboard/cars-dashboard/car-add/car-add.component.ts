@@ -15,7 +15,6 @@ import { Router } from '@angular/router';
   styleUrls: ['./car-add.component.css']
 })
 export class CarAddComponent implements OnInit {
-  apiUrl = "https://localhost:44360/api/";
   brands: Brand[];
   colors: Color[];
   carAddForm: FormGroup;

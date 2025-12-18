@@ -1,48 +1,90 @@
-<div class="container">
+<div class="container py-5">
   <div class="row">
-    <div class="col-md-3 ">
-      <app-brand></app-brand>
-      <app-color></app-color>
-    </div>
-    <div class="col-md-9">
-      <div class="mb-3">
+    <!-- Sidebar Filters -->
+    <div class="col-md-3 mb-4">
+      <div class="filter-sidebar p-3 rounded shadow-sm bg-white border">
+        <h5 class="fw-bold mb-3">Filters</h5>
+        <app-brand></app-brand>
+        <app-color></app-color>
 
-        <label for="carFilter" class="form-label"></label>
-        <input type="text" [(ngModel)]="carFilter" class="form-control" id="carFilter" placeholder="enter search text">
-      </div>
-
-      <app-car-filter></app-car-filter>
-      <div class="row" *ngIf="dataLoaded==true">
-        <div *ngFor="let car of cars |carFilter:carFilter" class="card m-2 " style="width: 267px; ">
-          <img src="{{imageUrl}}{{car.imagePath}}" alt="{{imageUrl}}{{car.imagePath}}" class="card-img-top" width="320"
-            height="200">
-
-          <div class="card-body">
-            <h5 class="card-title d-flex justify-content-center">{{car.carName}}</h5>
-            <p class="card-text d-flex justify-content-center">{{car.description}}</p>
+        <div class="mt-4">
+          <label for="carFilter" class="form-label fw-bold">Search</label>
+          <div class="input-group">
+            <span class="input-group-text bg-transparent border-end-0"><i class="fa fa-search"></i></span>
+            <input type="text" [(ngModel)]="carFilter" class="form-control border-start-0" id="carFilter"
+              placeholder="Brand, model...">
           </div>
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item">Brand: {{car.brandName}}</li>
-            <li class="list-group-item">Color: {{car.colorName}}</li>
-            <li class="list-group-item">Model: {{car.modelYear}}</li>
-            <li class="list-group-item">Price: {{car.dailyPrice }}</li>
-          </ul>
-          <div class="card-body">
-            <section style="float:left">
-              <button routerLink="/car/details/{{car.carId }}" type="button"
-                class="btn btn-outline-dark">Details</button>
-            </section>
-            <section style="float: right">
-              <button routerLink="/car/rental/{{car.carId}}" type="button" class="btn btn-outline-dark">Rent</button>
-            </section>
+        </div>
+
+        <div class="mt-4">
+          <app-car-filter></app-car-filter>
+        </div>
+      </div>
+    </div>
+
+    <!-- Car Listings -->
+    <div class="col-md-9">
+      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" *ngIf="dataLoaded; else loading">
+        <div *ngFor="let car of cars | carFilter:carFilter" class="col">
+          <div class="card h-100 car-card border-0 shadow-sm overflow-hidden">
+            <div class="image-container position-relative">
+              <img [src]="car.imagePath" class="card-img-top car-img" [alt]="car.carName">
+              <div
+                class="price-badge position-absolute top-0 end-0 m-3 px-3 py-1 rounded-pill bg-dark text-white shadow">
+                <span class="fw-bold">₱{{ car.dailyPrice }}</span><small>/day</small>
+              </div>
+            </div>
+
+            <div class="card-body p-4">
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <div>
+                  <h5 class="card-title fw-bold mb-0 text-uppercase letter-spacing-1">{{ car.carName }}</h5>
+                  <span class="text-muted small">{{ car.brandName }}</span>
+                </div>
+                <div class="badge bg-light text-dark border">{{ car.modelYear }}</div>
+              </div>
+
+              <p class="card-text text-muted small line-clamp-2 mt-2">{{ car.description }}</p>
+
+              <div class="car-specs mt-3 d-flex flex-wrap gap-2">
+                <div class="spec-item px-2 py-1 rounded bg-light border d-flex align-items-center">
+                  <span class="small text-muted me-1">Color:</span>
+                  <span class="small fw-medium">{{ car.colorName }}</span>
+                </div>
+                <!-- Mock specs for premium feel -->
+                <div class="spec-item px-2 py-1 rounded bg-light border d-flex align-items-center">
+                  <span class="small text-muted me-1">Transmission:</span>
+                  <span class="small fw-medium">Auto</span>
+                </div>
+                <div class="spec-item px-2 py-1 rounded bg-light border d-flex align-items-center">
+                  <span class="small text-muted me-1">Gas:</span>
+                  <span class="small fw-medium">Petrol</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-footer p-0 border-0 bg-transparent mb-3 px-4">
+              <div class="d-grid gap-2 d-md-flex justify-content-md-between pb-3">
+                <button [routerLink]="['/car/details', car.carId]"
+                  class="btn btn-outline-dark btn-sm flex-grow-1">Details</button>
+                <button [routerLink]="['/car/rental', car.carId]" class="btn btn-dark btn-sm flex-grow-1 shadow-sm">Rent
+                  Now</button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
+      <!-- Loading Placeholder -->
+      <ng-template #loading>
+        <div class="d-flex justify-content-center py-5">
+          <div class="spinner-border text-dark" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </div>
+      </ng-template>
     </div>
   </div>
-
-
 </div>
 
 <app-footer></app-footer>

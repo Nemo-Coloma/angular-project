@@ -16,7 +16,6 @@ export class CarDetailComponent implements OnInit {
   carImages: CarImage[] = [];
   currentImage: CarImage;
   dataLoaded: boolean = false;
-  imageUrl: string = "https://localhost:44360/Uploads/Images/";
 
   constructor(private carService: CarService,
     private carImageService: CarImageService,

@@ -115,12 +115,11 @@
     <div class="rent_container ">
       <div class="box card" *ngFor="let car of cars">
         <div class="img-box">
-          <img src="{{imageUrl}}{{car.imagePath}}" alt="{{imageUrl}}{{car.imagePath}}" class="card-img-top" width="320"
-            height="200">
+          <img [src]="car.imagePath" class="card-img-top" width="320" height="200">
         </div>
         <div class="price">
           <a href="">
-            {{car.dailyPrice}} TL
+            ₱{{car.dailyPrice}}
           </a>
         </div>
       </div>

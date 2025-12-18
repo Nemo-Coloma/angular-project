@@ -9,7 +9,6 @@ import { CarService } from 'src/app/services/car.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  imageUrl: string = "https://localhost:44360/Uploads/Images/";
   cars: Car[] = [];
   currentImage: CarImage;
   dataLoaded: boolean = false;

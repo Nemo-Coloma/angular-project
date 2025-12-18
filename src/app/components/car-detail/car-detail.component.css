@@ -1,0 +1,50 @@
+.car-info-card {
+    border-color: #f0f0f0;
+}
+
+.object-fit-cover {
+    object-fit: cover;
+}
+
+.letter-spacing-1 {
+    letter-spacing: 1px;
+}
+
+.small-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: #999;
+}
+
+.carousel-indicators [data-bs-target] {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #333;
+}
+
+.carousel-item img {
+    transition: transform 0.5s ease;
+}
+
+.carousel:hover .carousel-item img {
+    transform: scale(1.02);
+}
+
+.btn-lg {
+    padding: 1rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.price-section h3 {
+    color: #000;
+    font-size: 2.2rem;
+}
+
+@media (max-width: 991.98px) {
+    .display-6 {
+        font-size: 2rem;
+    }
+}
