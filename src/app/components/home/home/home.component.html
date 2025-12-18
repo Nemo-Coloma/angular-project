@@ -158,16 +158,30 @@
 
             <form>
               <div class="mb-3">
-                <label for="rentDate" class="form-label x-small fw-bold text-uppercase text-muted">Rent Date</label>
-                <input type="date" class="form-control form-control-sm" id="rentDate" name="rentDate"
+                <label for="hCustomerId" class="form-label x-small fw-bold text-uppercase text-muted">Customer /
+                  Company</label>
+                <select class="form-select form-select-sm" id="hCustomerId" name="customerId"
+                  [(ngModel)]="rental.customerId">
+                  <option value="" disabled>Select Customer</option>
+                  <option *ngFor="let c of customers" [value]="c.userId">{{ c.companyName }}</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label for="hRentDate" class="form-label x-small fw-bold text-uppercase text-muted">Rent Date</label>
+                <input type="date" class="form-control form-control-sm" id="hRentDate" name="rentDate"
                   [(ngModel)]="rental.rentDate">
               </div>
               <div class="mb-3">
-                <label for="returnDate" class="form-label x-small fw-bold text-uppercase text-muted">Return Date</label>
-                <input type="date" class="form-control form-control-sm" id="returnDate" name="returnDate"
+                <label for="hReturnDate" class="form-label x-small fw-bold text-uppercase text-muted">Return
+                  Date</label>
+                <input type="date" class="form-control form-control-sm" id="hReturnDate" name="returnDate"
                   [(ngModel)]="rental.returnDate">
               </div>
-              <div class="d-grid mt-4">
+              <div class="d-flex justify-content-between align-items-center mb-2 px-1">
+                <span class="x-small text-muted fw-bold">ESTIMATED TOTAL:</span>
+                <span class="fw-bold text-success">₱{{ calculateTotalPrice() }}</span>
+              </div>
+              <div class="d-grid mt-3">
                 <button type="button" class="btn btn-dark fw-bold" (click)="saveRental()">
                   {{ isEditing ? 'Update Rental' : 'Confirm Rental' }}
                 </button>
@@ -187,6 +201,7 @@
                 <div>
                   <div class="fw-bold small">{{ r.rentDate | date:'mediumDate' }} - {{ r.returnDate | date:'mediumDate'
                     }}</div>
+                  <div class="x-small fw-bold text-primary">{{ r.customerName || 'Anonymous' }}</div>
                   <div class="x-small text-muted">Total: ₱{{ r.totalRentPrice }}</div>
                 </div>
                 <div class="d-flex gap-1">

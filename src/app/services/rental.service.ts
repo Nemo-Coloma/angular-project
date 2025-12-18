@@ -25,14 +25,17 @@ export class RentalService {
   }
 
   getRentals(): Observable<ListResponseModel<Rental>> {
-    return this.httpClient.get<any[]>(`${this.apiUrl}/rentals?select=*,cars(name)`, { headers: this.headers }).pipe(
+    return this.httpClient.get<any[]>(`${this.apiUrl}/rentals?select=*,cars(name),customers(company_name)`, { headers: this.headers }).pipe(
       map(data => {
         const rentals: Rental[] = data.map(item => ({
           rentalId: item.id,
           carId: item.car_id,
+          customerId: item.customer_id,
           rentDate: item.rent_date,
           returnDate: item.return_date,
-          totalRentPrice: item.total_price
+          totalRentPrice: item.total_price,
+          carName: item.cars?.name,
+          customerName: item.customers?.company_name
         }));
         return { success: true, message: "Rentals listed successfully", data: rentals };
       })
@@ -42,6 +45,7 @@ export class RentalService {
   addRental(rental: Rental): Observable<any> {
     const body = {
       car_id: rental.carId,
+      customer_id: rental.customerId,
       rent_date: rental.rentDate,
       return_date: rental.returnDate,
       total_price: rental.totalRentPrice
@@ -51,6 +55,7 @@ export class RentalService {
 
   updateRental(rental: Rental): Observable<any> {
     const body = {
+      customer_id: rental.customerId,
       rent_date: rental.rentDate,
       return_date: rental.returnDate,
       total_price: rental.totalRentPrice
