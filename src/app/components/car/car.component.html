@@ -67,24 +67,96 @@
               <div class="d-grid gap-2 d-md-flex justify-content-md-between pb-3">
                 <button [routerLink]="['/car/details', car.carId]"
                   class="btn btn-outline-dark btn-sm flex-grow-1">Details</button>
-                <button [routerLink]="['/car/rental', car.carId]" class="btn btn-dark btn-sm flex-grow-1 shadow-sm">Rent
-                  Now</button>
+                <button (click)="openRentModal(car)" class="btn btn-dark btn-sm flex-grow-1 shadow-sm">Rent Now</button>
               </div>
             </div>
           </div>
         </div>
       </div>
-
-      <!-- Loading Placeholder -->
-      <ng-template #loading>
-        <div class="d-flex justify-content-center py-5">
-          <div class="spinner-border text-dark" role="status">
-            <span class="visually-hidden">Loading...</span>
-          </div>
-        </div>
-      </ng-template>
     </div>
   </div>
 </div>
+
+<!-- Rental Modal -->
+<div class="modal fade" [class.show]="isModalOpen" [style.display]="isModalOpen ? 'block' : 'none'" tabindex="-1"
+  role="dialog" aria-labelledby="rentalModalLabel" aria-hidden="true" style="background: rgba(0,0,0,0.5);">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content border-0 shadow-lg">
+      <div class="modal-header bg-dark text-white border-0">
+        <h5 class="modal-title fw-bold" id="rentalModalLabel">RENT CAR: {{ selectedCar?.carName }}</h5>
+        <button type="button" class="btn-close btn-close-white" (click)="closeModal()" aria-label="Close"></button>
+      </div>
+      <div class="modal-body p-4" *ngIf="selectedCar">
+        <div class="row">
+          <!-- Left side: Form -->
+          <div class="col-md-5 border-end">
+            <h6 class="fw-bold text-uppercase small-label mb-3">Rental Details</h6>
+            <div class="selected-car-info mb-3 d-flex align-items-center bg-light p-2 rounded">
+              <img [src]="selectedCar.imagePath" class="img-fluid rounded shadow-sm me-2"
+                style="width: 70px; height: 45px; object-fit: cover;">
+              <div>
+                <div class="fw-bold small">{{ selectedCar.carName }}</div>
+                <div class="text-success small fw-bold">₱{{ selectedCar.dailyPrice }}/day</div>
+              </div>
+            </div>
+
+            <form>
+              <div class="mb-3">
+                <label for="rentDate" class="form-label x-small fw-bold text-uppercase text-muted">Rent Date</label>
+                <input type="date" class="form-control form-control-sm" id="rentDate" name="rentDate"
+                  [(ngModel)]="rental.rentDate">
+              </div>
+              <div class="mb-3">
+                <label for="returnDate" class="form-label x-small fw-bold text-uppercase text-muted">Return Date</label>
+                <input type="date" class="form-control form-control-sm" id="returnDate" name="returnDate"
+                  [(ngModel)]="rental.returnDate">
+              </div>
+              <div class="d-grid mt-4">
+                <button type="button" class="btn btn-dark fw-bold" (click)="saveRental()">
+                  {{ isEditing ? 'Update Rental' : 'Confirm Rental' }}
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Right side: CRUD Management -->
+          <div class="col-md-7 ps-4">
+            <h6 class="fw-bold text-uppercase small-label mb-3">Recent Rentals</h6>
+            <div class="rental-history overflow-auto" style="max-height: 250px;">
+              <div class="alert alert-info py-2 small" *ngIf="rentals.length === 0">
+                No active rentals for this car yet.
+              </div>
+              <div *ngFor="let r of rentals"
+                class="rental-item mb-2 p-2 border rounded d-flex justify-content-between align-items-center">
+                <div>
+                  <div class="fw-bold small">{{ r.rentDate | date:'mediumDate' }} - {{ r.returnDate | date:'mediumDate'
+                    }}</div>
+                  <div class="x-small text-muted">Total: ₱{{ r.totalRentPrice }}</div>
+                </div>
+                <div class="d-flex gap-1">
+                  <button class="btn btn-sm btn-outline-dark border-0" (click)="editRental(r)">
+                    <i class="fa fa-edit"></i>
+                  </button>
+                  <button class="btn btn-sm btn-outline-danger border-0" (click)="deleteRental(r.rentalId!)">
+                    <i class="fa fa-trash"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Loading Placeholder -->
+<ng-template #loading>
+  <div class="d-flex justify-content-center py-5">
+    <div class="spinner-border text-dark" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+</ng-template>
 
 <app-footer></app-footer>
