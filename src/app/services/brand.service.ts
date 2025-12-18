@@ -9,30 +9,30 @@ import { SingleResponseModel } from '../models/singleResponseModel';
   providedIn: 'root'
 })
 export class BrandService {
-apiUrl="https://localhost:44388/api/";
+  apiUrl = "https://localhost:44388/api/";
 
-  constructor(private httpClient:HttpClient) { }
+  constructor(private httpClient: HttpClient) { }
 
-  getBrands():Observable<ListResponseModel<Brand>>{
-    return this.httpClient.get<ListResponseModel<Brand>>(this.apiUrl+"brands/getall")
+  getBrands(): Observable<ListResponseModel<Brand>> {
+    return this.httpClient.get<ListResponseModel<Brand>>(this.apiUrl + "brands/getall")
   }
 
-  getById(id:number):Observable<SingleResponseModel<Brand>> {
-    let newPath = this.apiUrl + "brands/getbyıd?brandId=" + id;
+  getById(id: number): Observable<SingleResponseModel<Brand>> {
+    let newPath = this.apiUrl + "brands/getbyid?brandId=" + id;
     return this.httpClient.get<SingleResponseModel<Brand>>(newPath);
   }
 
-  addBrand(brand:Brand):Observable<ResponseModel>{
+  addBrand(brand: Brand): Observable<ResponseModel> {
     return this.httpClient.post<ResponseModel>(this.apiUrl + "brands/add", brand)
   }
 
-  
-  updateBrand(brand:Brand):Observable<ListResponseModel<Brand>> {
+
+  updateBrand(brand: Brand): Observable<ListResponseModel<Brand>> {
     return this.httpClient.post<ListResponseModel<Brand>>(this.apiUrl + "brands/updated", brand)
   }
-  
 
-  deleteBrand(brand:Brand):Observable<ResponseModel>{
+
+  deleteBrand(brand: Brand): Observable<ResponseModel> {
     return this.httpClient.post<ResponseModel>(this.apiUrl + "brands/delete", brand)
   }
 

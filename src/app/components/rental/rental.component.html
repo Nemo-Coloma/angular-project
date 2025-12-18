@@ -16,7 +16,7 @@
             <td>{{ car.colorName }}</td>
           </tr>
           <tr>
-            <th scope="row">Günlük Fiyat</th>
+            <th scope="row">Daily Price</th>
             <td>
               {{
               car.dailyPrice | currency: "TRY":"symbol-narrow":"1.2-2"
@@ -24,11 +24,11 @@
             </td>
           </tr>
           <tr>
-            <th scope="row">Model Yılı</th>
+            <th scope="row">Model Year</th>
             <td>{{car.modelYear}}</td>
           </tr>
           <tr>
-            <th scope="row">Açıklama</th>
+            <th scope="row">Description</th>
             <td>{{ car.description }}</td>
           </tr>
         </tbody>
@@ -46,12 +46,12 @@
           </div>
           <br><br>
           <div>
-            <p *ngIf="endDate && startDate">Toplam ücret: {{rentPrice | currency:"TRY":"symbol-narrow":"1.2-2"}}</p>
+            <p *ngIf="endDate && startDate">Total price: {{rentPrice | currency:"TRY":"symbol-narrow":"1.2-2"}}</p>
           </div>
         </form>
       </div>
       <button (click)="addRental(rental)" type="button" class="btn btn-success"
-        style="position:absolute; bottom:20px; right:20px;">Kirala</button>
+        style="position:absolute; bottom:20px; right:20px;">Rent</button>
     </div>
   </div>
 </div>

@@ -49,7 +49,7 @@ export class RegisterComponent implements OnInit {
         })
     }
     else {
-      this.toasterService.error("Lütfen tüm alanları doldurunuz", "Dikkat!")
+      this.toasterService.error("Please fill in all fields", "Warning!")
     }
   }
 }

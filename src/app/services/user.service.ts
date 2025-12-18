@@ -15,13 +15,13 @@ export class UserService {
     private httpClient: HttpClient
   ) { }
 
-  getbyid(userId:number):Observable<SingleResponseModel<User>>{
-    let newPath = this.apiUrl + "users/getbyıd?userId=" + userId
+  getbyid(userId: number): Observable<SingleResponseModel<User>> {
+    let newPath = this.apiUrl + "users/getbyid?userId=" + userId
     return this.httpClient.get<SingleResponseModel<User>>(newPath)
   }
 
-  updateInfos(user:User):Observable<ResponseModel>{
+  updateInfos(user: User): Observable<ResponseModel> {
     let newPath = this.apiUrl + "users/updated"
-    return this.httpClient.put<ResponseModel>(newPath,user)
+    return this.httpClient.put<ResponseModel>(newPath, user)
   }
 }

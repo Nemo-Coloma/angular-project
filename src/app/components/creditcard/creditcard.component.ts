@@ -45,7 +45,7 @@ export class CreditCardComponent implements OnInit {
       this.rentalService.addRental(this.rental)
       this.toastrService.success("You have rented the car", "Transaction successful")
     } else {
-      this.toastrService.error("Bankanız bilgilerinizi onaylamadı", "Kart bulunamadı")
+      this.toastrService.error("Your bank did not approve your information", "Card not found")
     }
   }
 

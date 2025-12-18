@@ -46,7 +46,7 @@ export class UsereditComponent implements OnInit {
 
       })
     } else {
-      this.toastrService.error("Tüm alanları doldurmanız gerekli", "Hata")
+      this.toastrService.error("You must fill in all fields", "Error")
     }
   }
 

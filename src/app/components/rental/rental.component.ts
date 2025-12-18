@@ -41,11 +41,11 @@ export class RentalComponent implements OnInit {
 
   addRental(rental: Rental) {
 
-    if (this.rentable = true) {
+    if (this.rentable === true) {
       this.rental = this.rental;
 
       this.router.navigate(['/creditcard/', JSON.stringify(this.rental)]);
-      this.toastrService.info("Kredi kartı ödeme sayfasına yönlendiriliyor", "Yönlendiriliyor")
+      this.toastrService.info("Redirecting to credit card payment page", "Redirecting")
     } else {
       this.toastrService.error("You cannot rent the car between these dates", "Already rented")
       console.log("You cannot rent the car between these dates", "Already rented")
@@ -88,7 +88,7 @@ export class RentalComponent implements OnInit {
     else {
       this.rentPrice = 0
       this.toastrService.info("You cannot rent the car between these dates", "!")
-      console.log("samet")
+      console.log("Invalid date range")
     }
   }
 
