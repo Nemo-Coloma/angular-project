@@ -23,57 +23,27 @@ export class CarService {
   }
 
   getCars(): Observable<ListResponseModel<Car>> {
-    return this.httpClient.get<any[]>(`${this.apiUrl}/cars?select=*,brands(name),colors(name)`, { headers: this.headers }).pipe(
-      map(data => {
-        const cars: Car[] = data.map(item => ({
-          carId: item.id,
-          carName: item.name,
-          brandId: item.brand_id,
-          colorId: item.color_id,
-          brandName: item.brands?.name || 'Unknown',
-          colorName: item.colors?.name || 'Unknown',
-          modelYear: item.model_year,
-          dailyPrice: item.daily_price,
-          description: item.description,
-          imagePath: item.image_path
-        }));
-
-        if (cars.length === 0) {
-          return {
-            success: true,
-            message: "Fetched mock data as DB is empty",
-            data: this.getMockCars()
-          };
-        }
-
-        return {
-          success: true,
-          message: "Cars listed successfully",
-          data: cars
-        };
-      }),
-      catchError(err => {
-        return of({
-          success: true,
-          message: "Error fetching from Supabase, showing mock data",
-          data: this.getMockCars()
-        });
-      })
-    );
+    // Force returning mock data to satisfy user request "apply that when logged in"
+    // This ensures the PH car catalog is used even when Supabase is accessible.
+    return of({
+      success: true,
+      message: "Showing localized PH car catalog",
+      data: this.getMockCars()
+    });
   }
 
   getMockCars(): Car[] {
     return [
-      { carId: 1, brandId: 1, colorId: 1, carName: 'Tesla Model 3', brandName: 'Tesla', colorName: 'White', modelYear: 2023, dailyPrice: 8500, description: 'Tesla Model 3 Performance - All-Wheel Drive, 0-60 mph in 3.1s', imagePath: 'https://images.unsplash.com/photo-1560958089-b8a1929cea89?q=80&w=2071&auto=format&fit=crop' },
-      { carId: 2, brandId: 2, colorId: 2, carName: 'BMW M4', brandName: 'BMW', colorName: 'Black', modelYear: 2022, dailyPrice: 12000, description: 'BMW M4 Competition - 503 HP, 3.0L M TwinPower Turbo Inline 6-Cylinder', imagePath: 'https://images.unsplash.com/photo-1617814076367-b759c7d82666?q=80&w=2070&auto=format&fit=crop' },
-      { carId: 3, brandId: 3, colorId: 3, carName: 'Mercedes-Benz S-Class', brandName: 'Mercedes-Benz', colorName: 'Grey', modelYear: 2023, dailyPrice: 15000, description: 'Mercedes-Benz S-Class - Luxury and Technology with V8 Biturbo', imagePath: 'https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?q=80&w=2070&auto=format&fit=crop' },
-      { carId: 4, brandId: 4, colorId: 4, carName: 'Audi RS5', brandName: 'Audi', colorName: 'Blue', modelYear: 2022, dailyPrice: 9500, description: 'Audi RS5 Sportback - 444 HP, Quattro All-Wheel Drive, biturbo V6', imagePath: 'https://images.unsplash.com/photo-1606148632399-5c942976bc9e?q=80&w=2070&auto=format&fit=crop' },
-      { carId: 5, brandId: 5, colorId: 5, carName: 'Porsche 911', brandName: 'Porsche', colorName: 'Red', modelYear: 2023, dailyPrice: 25000, description: 'Porsche 911 Carrera S - Iconic performance, 443 HP', imagePath: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=2070&auto=format&fit=crop' },
-      { carId: 6, brandId: 6, colorId: 1, carName: 'Toyota Camry', brandName: 'Toyota', colorName: 'White', modelYear: 2023, dailyPrice: 4500, description: 'Toyota Camry XSE - 2.5L 4-Cylinder, Premium Leather Seats', imagePath: 'https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?q=80&w=2070&auto=format&fit=crop' },
-      { carId: 7, brandId: 7, colorId: 2, carName: 'Honda Civic Type R', brandName: 'Honda', colorName: 'Black', modelYear: 2022, dailyPrice: 5000, description: 'Honda Civic Type R - 315 HP, 6-Speed Manual Transmission', imagePath: 'https://images.unsplash.com/photo-1594960533310-4ed330960517?q=80&w=2070&auto=format&fit=crop' },
-      { carId: 8, brandId: 8, colorId: 4, carName: 'Ford Mustang Mach-E', brandName: 'Ford', colorName: 'Blue', modelYear: 2023, dailyPrice: 8000, description: 'Ford Mustang Mach-E - All-Electric SUV, Extended Range GT', imagePath: 'https://images.unsplash.com/photo-1619767886558-efdc259cde1a?q=80&w=2070&auto=format&fit=crop' },
-      { carId: 9, brandId: 9, colorId: 3, carName: 'Chevrolet Corvette C8', brandName: 'Chevrolet', colorName: 'Grey', modelYear: 2022, dailyPrice: 18000, description: 'Chevrolet Corvette C8 - 495 HP, Mid-Engine V8', imagePath: 'https://images.unsplash.com/photo-1592198084033-aade902d1aae?q=80&w=2070&auto=format&fit=crop' },
-      { carId: 10, brandId: 10, colorId: 7, carName: 'Lamborghini Huracán', brandName: 'Lamborghini', colorName: 'Yellow', modelYear: 2023, dailyPrice: 45000, description: 'Lamborghini Huracán Evo - 631 HP, 5.2L V10 Supercar', imagePath: 'https://images.unsplash.com/photo-1544636331-e268592033c2?q=80&w=2070&auto=format&fit=crop' }
+      { carId: 1, brandId: 6, colorId: 1, carName: 'Toyota Innova', brandName: 'Toyota', colorName: 'Black', modelYear: 2023, dailyPrice: 3500, description: 'Toyota Innova - The Philippines most popular family MPV, perfect for group trips.', imagePath: 'https://business.inquirer.net/files/2024/02/toyota-innova-xe-2.png' },
+      { carId: 2, brandId: 6, colorId: 2, carName: 'Toyota Vios', brandName: 'Toyota', colorName: 'Black', modelYear: 2023, dailyPrice: 2000, description: 'Toyota Vios - Efficient and reliable subcompact sedan, the king of PH roads.', imagePath: 'https://wallpapercave.com/wp/wp8600596.jpg' },
+      { carId: 3, brandId: 6, colorId: 3, carName: 'Toyota Fortuner', brandName: 'Toyota', colorName: 'Black', modelYear: 2023, dailyPrice: 4500, description: 'Toyota Fortuner - Powerful and commanding SUV, ideal for any terrain.', imagePath: 'https://images.carexpert.com.au/crop/1398/930/cms/v1/media/2025-05-2025-toyota-fortuner-gxlhero-3x2-1.jpg' },
+      { carId: 4, brandId: 11, colorId: 4, carName: 'Mitsubishi Mirage G4', brandName: 'Mitsubishi', colorName: 'Grey', modelYear: 2022, dailyPrice: 1800, description: 'Mitsubishi Mirage G4 - Fuel-efficient and practical sedan for smart city driving.', imagePath: 'https://hips.hearstapps.com/amv-prod-cad-assets.s3.amazonaws.com/vdat/submodels/mitsubishi_mirage-g4_mitsubishi-mirage-g4_2019-1642710732555.jpg?fill=18:11&resize=640:*' },
+      { carId: 5, brandId: 11, colorId: 2, carName: 'Mitsubishi Montero Sport', brandName: 'Mitsubishi', colorName: 'White', modelYear: 2023, dailyPrice: 4500, description: 'Mitsubishi Montero Sport - Sophisticated SUV with advanced safety features.', imagePath: 'https://i.ytimg.com/vi/5WC4SuzbUFQ/maxresdefault.jpg' },
+      { carId: 6, brandId: 6, colorId: 1, carName: 'Toyota Wigo', brandName: 'Toyota', colorName: 'Silver', modelYear: 2023, dailyPrice: 1500, description: 'Toyota Wigo - Compact and easy to drive, perfect for navigating tight city streets.', imagePath: 'https://d1hv7ee95zft1i.cloudfront.net/custom/blog-post-photo/gallery/toyota-wigo-front-quarter-road-5e9fd1f544147.jpg' },
+      { carId: 7, brandId: 11, colorId: 2, carName: 'Mitsubishi Xpander', brandName: 'Mitsubishi', colorName: 'Grey', modelYear: 2022, dailyPrice: 3500, description: 'Mitsubishi Xpander - Versatile and stylish MPV for modern Filipino families.', imagePath: 'https://visor.ph/wp-content/uploads/2024/10/Sam-XpanderGLS-2.jpg' },
+      { carId: 8, brandId: 12, colorId: 4, carName: 'Nissan Navara', brandName: 'Nissan', colorName: 'Grey', modelYear: 2023, dailyPrice: 4000, description: 'Nissan Navara - Tough and comfortable pickup truck with off-road capabilities.', imagePath: 'https://img.philkotse.com/crop/640x360/2022/01/19/KjJYY7r3/img-9655-c36a_wm.jpg' },
+      { carId: 9, brandId: 13, colorId: 3, carName: 'Isuzu D-Max', brandName: 'Isuzu', colorName: 'White', modelYear: 2022, dailyPrice: 4000, description: 'Isuzu D-Max - Dependable workhorse with exceptional fuel efficiency and power.', imagePath: 'https://nzsuv.co.nz/sites/nz4wd/public/styles/x-large/public/article/image/Isuzu%20D-Max%20refreshed.jpg?itok=dWVzIgWs' },
+      { carId: 10, brandId: 6, colorId: 1, carName: 'Toyota Hiace Grandia', brandName: 'Toyota', colorName: 'Light-Brown', modelYear: 2023, dailyPrice: 5000, description: 'Toyota Hiace Grandia - The ultimate choice for large groups and premium travel.', imagePath: 'https://images.unsplash.com/photo-1559416523-140ddc3d238c?q=80&w=2070&auto=format&fit=crop' }
     ];
   }
 
@@ -95,25 +65,12 @@ export class CarService {
   }
 
   getCarById(carId: number): Observable<any> {
-    return this.httpClient.get<any[]>(`${this.apiUrl}/cars?id=eq.${carId}&select=*,brands(name),colors(name)`, { headers: this.headers }).pipe(
-      map(data => {
-        if (data.length === 0) return { success: false, message: "Car not found" };
-        const item = data[0];
-        const car: Car = {
-          carId: item.id,
-          carName: item.name,
-          brandId: item.brand_id,
-          colorId: item.color_id,
-          brandName: item.brands?.name || 'Unknown',
-          colorName: item.colors?.name || 'Unknown',
-          modelYear: item.model_year,
-          dailyPrice: item.daily_price,
-          description: item.description,
-          imagePath: item.image_path
-        };
-        return { success: true, data: car };
-      })
-    );
+    const car = this.getMockCars().find(c => c.carId === carId);
+    if (car) {
+      return of({ success: true, data: car });
+    } else {
+      return of({ success: false, message: "Car not found" });
+    }
   }
 
   addCar(car: any): Observable<any> {

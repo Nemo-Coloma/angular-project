@@ -45,41 +45,7 @@
   </div>
 </div>
 
-<div class="container">
-  <div class="row row-cols-1 row-cols-md-3 g-4">
-    <div class="col">
-      <div class="card h-100">
-        <img src="../../../../assets/Img/c-1.png" class="card-img-top h-100  p-5" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">Choose Your Car</h5>
-          <p class="card-text">You can choose the cars suitable for your needs with flexible seat placement, Automatic
-            Gear, and Manual Gear options.</p>
-          <a href="#" class="btn btn-primary auth">Select</a>
-        </div>
-      </div>
-    </div>
-    <div class="col">
-      <div class="card h-100">
-        <img src="../../../../assets/Img/c-2.png" class="card-img-top h-100 p-5" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">Get Your Car</h5>
-          <p class="card-text">You can pick up and drop off your vehicle at your designated location</p>
-          <a href="#" class="btn btn-primary auth">Select</a>
-        </div>
-      </div>
-    </div>
-    <div class="col">
-      <div class="card h-100">
-        <img src="../../../../assets/Img/c-3.png" class="card-img-top h-100  p-5" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">Contact Your Dealer</h5>
-          <p class="card-text">You can contact the relevant dealer to get information about the vehicle</p>
-          <a href="#" class="btn btn-primary auth">Select</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+<!-- removed Choose Your Car, Get Your Car, Contact Your Dealer sections -->
 
 
 
@@ -157,15 +123,7 @@
             </div>
 
             <form>
-              <div class="mb-3">
-                <label for="hCustomerId" class="form-label x-small fw-bold text-uppercase text-muted">Customer /
-                  Company</label>
-                <select class="form-select form-select-sm" id="hCustomerId" name="customerId"
-                  [(ngModel)]="rental.customerId">
-                  <option value="" disabled>Select Customer</option>
-                  <option *ngFor="let c of customers" [value]="c.userId">{{ c.companyName }}</option>
-                </select>
-              </div>
+              <!-- removed customer selection -->
               <div class="mb-3">
                 <label for="hRentDate" class="form-label x-small fw-bold text-uppercase text-muted">Rent Date</label>
                 <input type="date" class="form-control form-control-sm" id="hRentDate" name="rentDate"

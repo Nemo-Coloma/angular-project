@@ -60,37 +60,23 @@ export class RentalComponent implements OnInit {
 
   calculatePrice() {
     if (this.startDate && this.endDate) {
-      let endDate = new Date(this.endDate.toString())
-      let startDate = new Date(this.startDate.toString())
-      let endDay = Number.parseInt(endDate.getDate().toString())
-      let endMonth = Number.parseInt(endDate.getMonth().toString())
-      let endYear = Number.parseInt(endDate.getFullYear().toString())
-      let startDay = Number.parseInt(startDate.getDate().toString())
-      let startMonth = Number.parseInt(startDate.getMonth().toString())
-      let startYear = Number.parseInt(startDate.getFullYear().toString())
-      let result = ((endDay - startDay) + ((endMonth - startMonth) * 30) + ((endYear - startYear) * 365) + 1) * this.car.dailyPrice
-      if (result > 0) {
+      const start = new Date(this.startDate);
+      const end = new Date(this.endDate);
+
+      const diffTime = end.getTime() - start.getTime();
+      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1;
+
+      if (diffDays > 0) {
+        let result = diffDays * this.car.dailyPrice;
         this.rental = { carId: this.car.carId, rentDate: this.startDate, returnDate: this.endDate, totalRentPrice: result };
-        console.log(result)
-        this.rentPrice = result
-        this.setRentable()
+        this.rentPrice = result;
+        this.setRentable();
       } else {
-        this.rentPrice = 0
-        this.toastrService.info("You cannot rent the car between these dates", "!")
+        this.rentPrice = 0;
+        this.toastrService.info("End date must be after start date", "!");
       }
-    }
-    else if (this.startDate!) {
-
-    }
-    else if (this.endDate!) {
-
-    }
-    else {
-      this.rentPrice = 0
-      this.toastrService.info("You cannot rent the car between these dates", "!")
-      console.log("Invalid date range")
+    } else {
+      this.rentPrice = 0;
     }
   }
-
-
 }

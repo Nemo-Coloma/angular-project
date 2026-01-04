@@ -87,18 +87,25 @@ export class HomeComponent implements OnInit {
     if (this.rental.rentDate && this.rental.returnDate && this.selectedCar) {
       const date1 = new Date(this.rental.rentDate);
       const date2 = new Date(this.rental.returnDate);
-      const diffTime = Math.abs(date2.getTime() - date1.getTime());
-      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-      return (diffDays || 1) * this.selectedCar.dailyPrice;
+
+      // Calculate difference in days
+      const diffTime = date2.getTime() - date1.getTime();
+      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1; // Include both days
+
+      return diffDays > 0 ? diffDays * this.selectedCar.dailyPrice : 0;
     }
     return this.selectedCar?.dailyPrice || 0;
   }
 
   saveRental() {
     console.log("Current Home Rental State:", this.rental);
-    if (!this.rental.rentDate || !this.rental.returnDate || !this.rental.customerId) {
-      this.toastrService.warning("Please select both dates and a customer");
+    if (!this.rental.rentDate || !this.rental.returnDate) {
+      this.toastrService.warning("Please select both dates");
       return;
+    }
+
+    if (!this.rental.customerId && this.customers.length > 0) {
+      this.rental.customerId = this.customers[0].userId?.toString();
     }
 
     this.rental.totalRentPrice = this.calculateTotalPrice();
@@ -113,7 +120,7 @@ export class HomeComponent implements OnInit {
       });
     } else {
       this.rentalService.addRental(this.rental).subscribe(res => {
-        this.toastrService.success("Car rented successfully!");
+        this.toastrService.success("you have successfully rented the vehicle.");
         this.loadRentals(this.selectedCar!.carId);
       }, err => {
         this.toastrService.error("Could not complete rental");

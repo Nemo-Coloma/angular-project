@@ -1,7 +1,7 @@
 <div class="container py-5">
   <div class="row">
-    <!-- Sidebar Filters -->
-    <div class="col-md-3 mb-4">
+    <!-- Sidebar Filters (Removed) -->
+    <!-- <div class="col-md-3 mb-4">
       <div class="filter-sidebar p-3 rounded shadow-sm bg-white border">
         <h5 class="fw-bold mb-3">Filters</h5>
         <app-brand></app-brand>
@@ -20,10 +20,10 @@
           <app-car-filter></app-car-filter>
         </div>
       </div>
-    </div>
+    </div> -->
 
-    <!-- Car Listings -->
-    <div class="col-md-9">
+    <!-- Car Listings - Full Width -->
+    <div class="col-md-12">
       <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" *ngIf="dataLoaded; else loading">
         <div *ngFor="let car of cars | carFilter:carFilter" class="col">
           <div class="card h-100 car-card border-0 shadow-sm overflow-hidden">
@@ -101,15 +101,7 @@
             </div>
 
             <form>
-              <div class="mb-3">
-                <label for="customerId" class="form-label x-small fw-bold text-uppercase text-muted">Customer /
-                  Company</label>
-                <select class="form-select form-select-sm" id="customerId" name="customerId"
-                  [(ngModel)]="rental.customerId">
-                  <option value="" disabled>Select Customer</option>
-                  <option *ngFor="let c of customers" [value]="c.userId">{{ c.companyName }}</option>
-                </select>
-              </div>
+              <!-- removed customer selection -->
               <div class="mb-3">
                 <label for="rentDate" class="form-label x-small fw-bold text-uppercase text-muted">Rent Date</label>
                 <input type="date" class="form-control form-control-sm" id="rentDate" name="rentDate"
