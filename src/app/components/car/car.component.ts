@@ -87,13 +87,13 @@ export class CarComponent implements OnInit {
     })
   }
 
-  // Rental Modal Methods
   openRentModal(car: Car) {
     this.selectedCar = car;
+    const today = new Date().toISOString().split('T')[0];
     this.rental = {
       carId: car.carId,
       customerId: this.customers[0]?.userId?.toString() || '',
-      rentDate: new Date(),
+      rentDate: today as any,
       returnDate: undefined,
       totalRentPrice: car.dailyPrice
     };
@@ -132,6 +132,7 @@ export class CarComponent implements OnInit {
   }
 
   saveRental() {
+    console.log("Current Rental State:", this.rental);
     if (!this.rental.rentDate || !this.rental.returnDate || !this.rental.customerId) {
       this.toastrService.warning("Please select both dates and a customer");
       return;
@@ -144,7 +145,8 @@ export class CarComponent implements OnInit {
         this.toastrService.success("Rental updated successfully");
         this.loadRentals(this.selectedCar!.carId);
         this.isEditing = false;
-        this.rental = { carId: this.selectedCar!.carId, rentDate: new Date(), customerId: this.rental.customerId };
+        const today = new Date().toISOString().split('T')[0];
+        this.rental = { carId: this.selectedCar!.carId, rentDate: today as any, customerId: this.rental.customerId };
       });
     } else {
       this.rentalService.addRental(this.rental).subscribe(res => {
