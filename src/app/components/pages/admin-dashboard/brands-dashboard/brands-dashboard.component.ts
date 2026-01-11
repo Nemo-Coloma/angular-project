@@ -9,12 +9,12 @@ import { BrandService } from 'src/app/services/brand.service';
 })
 export class BrandsDashboardComponent implements OnInit {
 
- brands:Brand[] = [];
+  brands: any[] = [];
   dataLoaded = false;
   constructor(
-    private brandService:BrandService,
-  
-    ) { }
+    private brandService: BrandService,
+
+  ) { }
 
   ngOnInit(): void {
     this.getBrands()
@@ -23,7 +23,7 @@ export class BrandsDashboardComponent implements OnInit {
   getBrands() {
     this.brandService.getBrands().subscribe(response => {
       this.brands = response.data,
-      this.dataLoaded = true;
+        this.dataLoaded = true;
     })
 
   }

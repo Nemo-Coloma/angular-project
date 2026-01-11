@@ -19,7 +19,6 @@ export class CarComponent implements OnInit {
   dataLoaded: boolean = false;
   carFilter: string = "";
 
-  // Rental Modal State
   selectedCar: Car | null = null;
   rental: Rental = { carId: 0, rentDate: new Date() };
   rentals: Rental[] = [];
@@ -38,18 +37,14 @@ export class CarComponent implements OnInit {
     this.activatedRoute.params.subscribe(params => {
       if (params["brandId"] && params["colorId"]) {
         this.getCarsBySelect(params["brandId"], params["colorId"])
-      }
-      else if (params["colorId"]) {
+      } else if (params["colorId"]) {
         this.getCarsByColor(params["colorId"]);
-      }
-      else if (params["brandId"]) {
+      } else if (params["brandId"]) {
         this.getCarsByBrand(params["brandId"])
-      }
-      else {
+      } else {
         this.getCars()
       }
     });
-
     this.getCustomers();
   }
 
@@ -60,36 +55,36 @@ export class CarComponent implements OnInit {
   }
 
   getCars() {
-    this.carService.getCars().subscribe(response => {
-      this.cars = response.data;
+    this.carService.getCars().subscribe(res => {
+      this.cars = res.data;
       this.dataLoaded = true;
     })
   }
 
   getCarsByBrand(brandId: number) {
-    this.carService.getCarsByBrand(brandId).subscribe(response => {
-      this.cars = response.data;
+    this.carService.getCarsByBrand(brandId).subscribe(res => {
+      this.cars = res.data;
       this.dataLoaded = true;
     })
   }
 
   getCarsByColor(colorId: number) {
-    this.carService.getCarsByColor(colorId).subscribe(response => {
-      this.cars = response.data;
+    this.carService.getCarsByColor(colorId).subscribe(res => {
+      this.cars = res.data;
       this.dataLoaded = true;
     })
   }
 
   getCarsBySelect(brandId: number, colorId: number) {
-    this.carService.getCarsBySelect(brandId, colorId).subscribe(response => {
-      this.cars = response.data
+    this.carService.getCarsBySelect(brandId, colorId).subscribe(res => {
+      this.cars = res.data
       this.dataLoaded = true;
     })
   }
 
   openRentModal(car: Car) {
     this.selectedCar = car;
-    const today = new Date().toISOString().split('T')[0];
+    let today = new Date().toISOString().split('T')[0];
     this.rental = {
       carId: car.carId,
       customerId: this.customers[0]?.userId?.toString() || '',
@@ -122,53 +117,47 @@ export class CarComponent implements OnInit {
 
   calculateTotalPrice(): number {
     if (this.rental.rentDate && this.rental.returnDate && this.selectedCar) {
-      const date1 = new Date(this.rental.rentDate);
-      const date2 = new Date(this.rental.returnDate);
-
-      // Calculate difference in days
-      const diffTime = date2.getTime() - date1.getTime();
-      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1; // Include both days
-
-      return diffDays > 0 ? diffDays * this.selectedCar.dailyPrice : 0;
+      let date1 = new Date(this.rental.rentDate);
+      let date2 = new Date(this.rental.returnDate);
+      let diffTime = date2.getTime() - date1.getTime();
+      let diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1;
+      if (diffDays > 0) {
+        return diffDays * this.selectedCar.dailyPrice;
+      }
+      return 0;
     }
     return this.selectedCar?.dailyPrice || 0;
   }
 
   saveRental() {
-    console.log("Current Rental State:", this.rental);
     if (!this.rental.rentDate || !this.rental.returnDate) {
-      this.toastrService.warning("Please select both dates");
+      this.toastrService.warning("Select dates first");
       return;
     }
-
     if (!this.rental.customerId && this.customers.length > 0) {
       this.rental.customerId = this.customers[0].userId?.toString();
     }
-
     this.rental.totalRentPrice = this.calculateTotalPrice();
-
     if (this.isEditing) {
       this.rentalService.updateRental(this.rental).subscribe(res => {
-        this.toastrService.success("Rental updated successfully");
+        this.toastrService.success("Rental updated");
         this.loadRentals(this.selectedCar!.carId);
         this.isEditing = false;
-        const today = new Date().toISOString().split('T')[0];
-        this.rental = { carId: this.selectedCar!.carId, rentDate: today as any, customerId: this.rental.customerId };
       });
     } else {
       this.rentalService.addRental(this.rental).subscribe(res => {
-        this.toastrService.success("Car rented successfully!");
+        this.toastrService.success("Car rented!");
         this.loadRentals(this.selectedCar!.carId);
       }, err => {
-        this.toastrService.error("Could not complete rental");
+        this.toastrService.error("Could not rent car");
       });
     }
   }
 
   deleteRental(rentalId: number) {
-    if (confirm("Are you sure you want to cancel this rental?")) {
+    if (confirm("Cancel this rental?")) {
       this.rentalService.deleteRental(rentalId).subscribe(res => {
-        this.toastrService.info("Rental cancelled");
+        this.toastrService.info("Cancelled");
         this.loadRentals(this.selectedCar!.carId);
       });
     }

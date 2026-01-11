@@ -9,12 +9,12 @@ import { ColorService } from 'src/app/services/color.service';
   styleUrls: ['./colors-dashboard.component.css']
 })
 export class ColorsDashboardComponent implements OnInit {
-  colors:Color[] = [];
+  colors: any[] = [];
   dataLoaded = false;
   constructor(
-    private colorService:ColorService,
-  
-    ) { }
+    private colorService: ColorService,
+
+  ) { }
 
   ngOnInit(): void {
     this.getColors()
@@ -23,12 +23,12 @@ export class ColorsDashboardComponent implements OnInit {
   getColors() {
     this.colorService.getColors().subscribe(response => {
       this.colors = response.data,
-      this.dataLoaded = true;
+        this.dataLoaded = true;
     })
   }
 
 
- 
-  
+
+
 
 }

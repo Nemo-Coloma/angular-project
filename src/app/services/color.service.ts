@@ -6,36 +6,41 @@ import { Color } from '../models/color';
 import { ListResponseModel } from '../models/listResponseModel';
 import { ResponseModel } from '../models/responseModel';
 import { SingleResponseModel } from '../models/singleResponseModel';
-
-
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ColorService {
+  apiUrl = environment.supabaseUrl + "/rest/v1/colors";
 
- apiUrl='https://localhost:44388/api/'
-  constructor(private httpClient:HttpClient) { }
+  constructor(private httpClient: HttpClient) { }
 
-  getColors(): Observable<ListResponseModel<Color>>{
-    return this.httpClient.get<ListResponseModel<Color>>(this.apiUrl+"colors/getall");
-  }
-  getById(id:number):Observable<SingleResponseModel<Color>> {
-    let newPath = this.apiUrl + "colors/getbyid?colorId=" + id;
-    return this.httpClient.get<SingleResponseModel<Color>>(newPath);
-  }
-
-  addColor(color:Color):Observable<ResponseModel>{
-    return this.httpClient.post<ResponseModel>(this.apiUrl + "colors/add", color)
+  getHeaders() {
+    return new HttpHeaders({
+      'apikey': environment.supabaseKey,
+      'Authorization': 'Bearer ' + environment.supabaseKey,
+      'Content-Type': 'application/json'
+    });
   }
 
-  updateColor(color:Color):Observable<ListResponseModel<Color>> {
-
-    return this.httpClient.post<ListResponseModel<Color>>(this.apiUrl + "colors/updated", color)
+  getColors(): Observable<ListResponseModel<Color>> {
+    return this.httpClient.get<any>(this.apiUrl + "?select=*", { headers: this.getHeaders() });
   }
-  
-  deleteColor(color:Color):Observable<ResponseModel>{
-    
-    return this.httpClient.post<ResponseModel>(this.apiUrl + "colors/delete", color)
+
+  getById(id: number): Observable<SingleResponseModel<Color>> {
+    return this.httpClient.get<any>(this.apiUrl + "?colorId=eq." + id, { headers: this.getHeaders() });
+  }
+
+  addColor(color: Color): Observable<ResponseModel> {
+    return this.httpClient.post<any>(this.apiUrl, color, { headers: this.getHeaders() });
+  }
+
+  updateColor(color: Color): Observable<any> {
+    return this.httpClient.patch(this.apiUrl + "?colorId=eq." + color.colorId, color, { headers: this.getHeaders() });
+  }
+
+  deleteColor(color: Color): Observable<any> {
+    return this.httpClient.delete(this.apiUrl + "?colorId=eq." + color.colorId, { headers: this.getHeaders() });
   }
 }

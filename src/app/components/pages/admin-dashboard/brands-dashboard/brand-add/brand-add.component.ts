@@ -10,8 +10,9 @@ import { BrandService } from 'src/app/services/brand.service';
   styleUrls: ['./brand-add.component.css']
 })
 export class BrandAddComponent implements OnInit {
-  brands: Brand[];
+  brands: Brand[] = [];
   brandAddForm: FormGroup;
+
   constructor(
     private brandService: BrandService,
     private toastrService: ToastrService,
@@ -19,34 +20,25 @@ export class BrandAddComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.createCarAddForm();
+    this.createBrandForm();
   }
 
-  createCarAddForm() {
+  createBrandForm() {
     this.brandAddForm = this.formBuilder.group({
       brandName: ["", Validators.required]
-
     })
   }
 
   addBrand() {
     if (this.brandAddForm.valid) {
-      let carModel = Object.assign({}, this.brandAddForm.value);
-      this.brandService.addBrand(carModel).subscribe(
-        response => {
-          this.toastrService.success(response.message, "Success")
-        },
-        responseError => {
-          if (responseError.error.ValidationErrors.length > 0) {
-            for (let i = 0; i < responseError.error.ValidationErrors.length; i++) {
-              this.toastrService.error(responseError.error.ValidationErrors[i].ErrorMessage, "Validation Error")
-            }
-          }
-        })
-    }
-    else {
-      this.toastrService.error("Formunuz Eksik", "Dikkat!")
+      let brandData = this.brandAddForm.value;
+      this.brandService.addBrand(brandData).subscribe(res => {
+        this.toastrService.success("Brand added");
+      }, err => {
+        this.toastrService.error("Could not add brand");
+      })
+    } else {
+      this.toastrService.error("Form is empty");
     }
   }
-
 }

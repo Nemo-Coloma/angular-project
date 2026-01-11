@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CarService } from '../../../../../services/car.service';
 import { BrandService } from '../../../../../services/brand.service';
 import { ColorService } from '../../../../../services/color.service';
@@ -8,18 +8,18 @@ import { Brand } from 'src/app/models/brand';
 import { Color } from 'src/app/models/color';
 import { Router } from '@angular/router';
 
-
 @Component({
   selector: 'app-car-add',
   templateUrl: './car-add.component.html',
   styleUrls: ['./car-add.component.css']
 })
 export class CarAddComponent implements OnInit {
-  brands: Brand[];
-  colors: Color[];
+  brands: Brand[] = [];
+  colors: Color[] = [];
   carAddForm: FormGroup;
 
-  constructor(private carService: CarService,
+  constructor(
+    private carService: CarService,
     private brandService: BrandService,
     private colorService: ColorService,
     private toastrService: ToastrService,
@@ -34,14 +34,14 @@ export class CarAddComponent implements OnInit {
   }
 
   getBrands() {
-    this.brandService.getBrands().subscribe(response => {
-      this.brands = response.data;
+    this.brandService.getBrands().subscribe(res => {
+      this.brands = res.data;
     })
   }
 
   getColors() {
-    this.colorService.getColors().subscribe(response => {
-      this.colors = response.data;
+    this.colorService.getColors().subscribe(res => {
+      this.colors = res.data;
     })
   }
 
@@ -53,34 +53,20 @@ export class CarAddComponent implements OnInit {
       dailyPrice: ["", Validators.required],
       modelYear: ["", Validators.required],
       description: ["", Validators.required]
-
     })
   }
 
   addCar() {
     if (this.carAddForm.valid) {
-      let carModel = Object.assign({}, this.carAddForm.value);
-      this.carService.addCar(carModel).subscribe(
-        response => {
-          this.toastrService.success(response.message, "Success")
-          this.router.navigate(['admin', 'cars']);
-        },
-
-        responseError => {
-          if (responseError.error.ValidationErrors.length > 0) {
-            for (let i = 0; i < responseError.error.ValidationErrors.length; i++) {
-              this.toastrService.error(responseError.error.ValidationErrors[i].ErrorMessage, "Car Could Not Be Added")
-            }
-          }
-        })
-    }
-    else {
-      this.toastrService.error("Formunuz Eksik", "Dikkat!")
+      let carData = this.carAddForm.value;
+      this.carService.addCar(carData).subscribe(res => {
+        this.toastrService.success("Car added");
+        this.router.navigate(['admin', 'cars']);
+      }, err => {
+        this.toastrService.error("Could not add car");
+      })
+    } else {
+      this.toastrService.error("Form is missing data");
     }
   }
-
-
-
-
-
 }

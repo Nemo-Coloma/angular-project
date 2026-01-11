@@ -11,10 +11,10 @@ import { ColorService } from 'src/app/services/color.service';
   styleUrls: ['./color-add.component.css']
 })
 export class ColorAddComponent implements OnInit {
-
-  colors: Color[];
+  colors: Color[] = [];
   colorAddForm: FormGroup;
   dataLoaded = false;
+
   constructor(
     private colorService: ColorService,
     private toastrService: ToastrService,
@@ -23,40 +23,26 @@ export class ColorAddComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.createCarAddForm();
+    this.createForm();
   }
 
-  createCarAddForm() {
+  createForm() {
     this.colorAddForm = this.formBuilder.group({
       colorName: ["", Validators.required]
+    })
+  }
 
-    })
-  }
-  getColors() {
-    this.colorService.getColors().subscribe(response => {
-      this.colors = response.data,
-        this.dataLoaded = true;
-    })
-  }
   addColor() {
     if (this.colorAddForm.valid) {
-      let colorModel = Object.assign({}, this.colorAddForm.value);
-      this.colorService.addColor(colorModel).subscribe(
-        response => {
-          this.toastrService.success(response.message, "Success")
-          this.router.navigate(['admin', 'colors']);
-        },
-        responseError => {
-          if (responseError.error.ValidationErrors.length > 0) {
-            for (let i = 0; i < responseError.error.ValidationErrors.length; i++) {
-              this.toastrService.error(responseError.error.ValidationErrors[i].ErrorMessage, "Validation Error")
-            }
-          }
-        })
-    }
-    else {
-      this.toastrService.error("Formunuz Eksik", "Dikkat!")
+      let colorData = this.colorAddForm.value;
+      this.colorService.addColor(colorData).subscribe(res => {
+        this.toastrService.success("Color added");
+        this.router.navigate(['admin', 'colors']);
+      }, err => {
+        this.toastrService.error("Could not add color");
+      })
+    } else {
+      this.toastrService.error("Form is missing data");
     }
   }
-
 }

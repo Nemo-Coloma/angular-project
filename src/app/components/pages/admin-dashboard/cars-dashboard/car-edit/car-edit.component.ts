@@ -22,8 +22,6 @@ export class CarEditComponent implements OnInit {
   carUpdateForm: FormGroup;
   colors: Color[] = [];
   brands: Brand[] = [];
-  selectedColor: number;
-  selectedBrand: number;
   modelYearList: number[] = [];
 
   constructor(
@@ -44,60 +42,51 @@ export class CarEditComponent implements OnInit {
         this.getCurrentCar(params["carId"]);
         this.getColors();
         this.getBrands();
-        this.createModelYearArray();
+        this.createModelYearList();
+        this.getImages(params["carId"]);
       }
-      this.getImagesByCarId();
     });
   }
 
-  createModelYearArray() {
-    let currentYear: number = new Date().getFullYear();
-    for (let i = currentYear + 1; i >= 1950; i--) {
+  createModelYearList() {
+    let year = new Date().getFullYear();
+    for (let i = year + 1; i >= 1950; i--) {
       this.modelYearList.push(i);
     }
   }
 
   getColors() {
-    this.colorService.getColors().subscribe(response => {
-      this.colors = response.data;
+    this.colorService.getColors().subscribe(res => {
+      this.colors = res.data;
     });
   }
 
   getBrands() {
-    this.brandService.getBrands().subscribe(response => {
-      this.brands = response.data;
+    this.brandService.getBrands().subscribe(res => {
+      this.brands = res.data;
     });
   }
-  getImagesByCarId() {
 
-    this.carImageService.getCarImages(this.activatedRoute.snapshot.params["carId"]).subscribe((response) => {
-      this.carImages = response.data;
+  getImages(carId: number) {
+    this.carImageService.getCarImages(carId).subscribe(res => {
+      this.carImages = res.data;
     });
-  }
-  getCurrentImageClass(image: CarImage) {
-    if (image == this.carImages[0]) {
-      return "carousel-item active"
-    } else {
-      return "carousel-item"
-    }
   }
 
   getCurrentCar(carId: number) {
-    this.carService.getCarById(carId).subscribe(response => {
-      this.car = response.data;
-      this.selectedBrand = this.car.brandId;
-      this.selectedColor = this.car.colorId;
-      this.carUpdateForm.get('colorId')?.setValue(this.selectedColor);
-      this.carUpdateForm.get('brandId')?.setValue(this.selectedBrand);
-      this.carUpdateForm.get('carId')?.setValue(this.car.carId);
-      this.carUpdateForm.get('carName')?.setValue(this.car.carName);
-      this.carUpdateForm.get('dailyPrice')?.setValue(this.car.dailyPrice);
-      this.carUpdateForm.get('description')?.setValue(this.car.description);
-      this.carUpdateForm.get('modelYear')?.setValue(this.car.modelYear);
-
+    this.carService.getCarById(carId).subscribe(res => {
+      this.car = res.data;
+      this.carUpdateForm.patchValue({
+        carId: this.car.carId,
+        carName: this.car.carName,
+        colorId: this.car.colorId,
+        brandId: this.car.brandId,
+        modelYear: this.car.modelYear,
+        dailyPrice: this.car.dailyPrice,
+        description: this.car.description
+      });
     });
   }
-  get carFormControls() { return this.carUpdateForm.controls; }
 
   createUpdateForm() {
     this.carUpdateForm = this.formBuilder.group({
@@ -107,57 +96,33 @@ export class CarEditComponent implements OnInit {
       brandId: ["", Validators.required],
       modelYear: ["", Validators.required],
       dailyPrice: ["", Validators.required],
-      description: ["", Validators.required],
-
+      description: ["", Validators.required]
     });
   }
 
   updateCar() {
     if (this.carUpdateForm.valid) {
-      let carModel = Object.assign({}, this.carUpdateForm.value);
-
-      carModel.brandId = parseInt(carModel.brandId);
-      carModel.colorId = parseInt(carModel.colorId);
-      carModel.modelYear = parseInt(carModel.modelYear);
-
-      this.carService.updateCar(carModel).subscribe(response => {
-        this.toastrService.success("Car updated successfully.");
+      let carData = this.carUpdateForm.value;
+      this.carService.updateCar(carData).subscribe(res => {
+        this.toastrService.success("Car updated");
         this.router.navigate(['/admin/cars']);
-        this.toastrService.info("You are being redirected to the cars editing page.");
-      }, responseError => {
-        if (responseError.error.Errors.length > 0) {
-          for (let i = 0; i < responseError.error.ValidationErrors.length; i++) {
-            const element = responseError.error.ValidationErrors[i];
-            this.toastrService.error(element.ErrorMessage, "Car Could Not Be Updated");
-          }
-        }
+      }, err => {
+        this.toastrService.error("Update failed");
       });
     } else {
-      this.toastrService.warning("You must fill out the form completely.");
+      this.toastrService.warning("Fill the form");
     }
-
   }
 
   deleteCar() {
-    if (window.confirm('Are you sure you want to delete the car?')) {
-      let carModule: Car = {
-        carId: this.car.carId,
-        ...this.carUpdateForm.value,
-      };
-      this.carService.deleteCar(carModule).subscribe(
-        (response) => {
-          this.toastrService.success(response.message);
-          this.router.navigate(['admin', 'cars']);
-
-        },
-        (responseError) => {
-          if (responseError.error.Errors.length > 0)
-            responseError.error.Errors.forEach((error: any) =>
-              this.toastrService.error(error.ErrorMessage)
-            );
-        }
+    if (confirm("Delete car?")) {
+      this.carService.deleteCar(this.car).subscribe(res => {
+        this.toastrService.success("Car deleted");
+        this.router.navigate(['admin', 'cars']);
+      }, err => {
+        this.toastrService.error("Delete failed");
+      }
       );
     }
   }
-
 }

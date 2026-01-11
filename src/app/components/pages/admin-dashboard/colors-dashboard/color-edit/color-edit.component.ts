@@ -11,7 +11,6 @@ import { ColorService } from "src/app/services/color.service";
   styleUrls: ['./color-edit.component.css']
 })
 export class ColorEditComponent implements OnInit {
-
   color: Color;
   colorEditForm: FormGroup;
 
@@ -24,61 +23,52 @@ export class ColorEditComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.createColorUpdateForm()
+    this.createForm()
     this.activatedRoute.params.subscribe(params => {
       if (params["colorId"]) {
-        this.getColorById(params["colorId"])
+        this.getColor(params["colorId"])
       }
     })
   }
 
-  createColorUpdateForm() {
+  createForm() {
     this.colorEditForm = this.formBuilder.group({
       colorName: ["", Validators.required]
     })
   }
 
-  getColorById(colorId: number) {
-    this.colorService.getById(colorId).subscribe((response) => {
-      this.color = response.data;
+  getColor(colorId: number) {
+    this.colorService.getById(colorId).subscribe(res => {
+      this.color = res.data;
+      this.colorEditForm.patchValue({
+        colorName: this.color.colorName
+      });
     });
   }
 
   updateColor() {
     if (this.colorEditForm.valid) {
-      let colorModel = Object.assign({}, this.colorEditForm.value)
-      colorModel.colorId = Number(this.color.colorId)
-      this.colorService.updateColor(colorModel).subscribe(response => {
-        this.toastrService.success(response.message, "Success")
+      let colorData = this.colorEditForm.value;
+      colorData.colorId = this.color.colorId;
+      this.colorService.updateColor(colorData).subscribe(res => {
+        this.toastrService.success("Color updated");
         this.router.navigate(['admin', 'colors']);
-      }, responseError => {
-        this.toastrService.success(responseError.message, "Error")
+      }, err => {
+        this.toastrService.error("Update failed");
       })
     } else {
-      this.toastrService.error("Form eksik", "Dikkat")
+      this.toastrService.error("Fill the form");
     }
   }
 
-
-
-
   deleteColor() {
-    if (window.confirm('Are you sure you want to delete the color?')) {
-      let colorModule: Color = {
-        colorId: this.color.colorId,
-        ...this.colorEditForm.value,
-      };
-      this.colorService.deleteColor(colorModule).subscribe(
-        (response) => {
-          this.toastrService.success(response.message);
-          this.router.navigate(['admin', 'colors']);
-        },
-        (responseError) => {
-          if (responseError.error.Errors.length > 0)
-            responseError.error.Errors.forEach((error: any) =>
-              this.toastrService.error(error.ErrorMessage)
-            );
-        }
+    if (confirm("Delete color?")) {
+      this.colorService.deleteColor(this.color).subscribe(res => {
+        this.toastrService.success("Color deleted");
+        this.router.navigate(['admin', 'colors']);
+      }, err => {
+        this.toastrService.error("Delete failed");
+      }
       );
     }
   }

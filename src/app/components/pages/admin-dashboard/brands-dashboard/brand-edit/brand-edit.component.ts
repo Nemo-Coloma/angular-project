@@ -11,7 +11,6 @@ import { BrandService } from 'src/app/services/brand.service';
   styleUrls: ['./brand-edit.component.css']
 })
 export class BrandEditComponent implements OnInit {
-
   brand: Brand;
   brandEditForm: FormGroup;
 
@@ -24,60 +23,51 @@ export class BrandEditComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.createBrandUpdateForm()
+    this.createForm()
     this.activatedRoute.params.subscribe(params => {
       if (params["brandId"]) {
-        this.getBrandById(params["brandId"])
+        this.getBrand(params["brandId"])
       }
     })
   }
 
-  createBrandUpdateForm() {
+  createForm() {
     this.brandEditForm = this.formBuilder.group({
       brandName: ["", Validators.required]
     })
   }
 
-  getBrandById(brandId: number) {
-    this.brandService.getById(brandId).subscribe((response) => {
-      this.brand = response.data;
+  getBrand(brandId: number) {
+    this.brandService.getById(brandId).subscribe(res => {
+      this.brand = res.data;
+      this.brandEditForm.patchValue({
+        brandName: this.brand.brandName
+      });
     });
   }
 
   updateBrand() {
     if (this.brandEditForm.valid) {
-      let brandModel = Object.assign({}, this.brandEditForm.value)
-      brandModel.brandId = Number(this.brand.brandId)
-      this.brandService.updateBrand(brandModel).subscribe(response => {
-        this.toastrService.success(response.message)
-      }, responseError => {
-        this.toastrService.success(responseError.message)
+      let brandData = this.brandEditForm.value;
+      brandData.brandId = this.brand.brandId;
+      this.brandService.updateBrand(brandData).subscribe(res => {
+        this.toastrService.success("Brand updated");
+      }, err => {
+        this.toastrService.error("Update failed");
       })
     } else {
-      this.toastrService.error("Form eksik", "Hata")
+      this.toastrService.error("Fill the form");
     }
   }
 
-
-
-
   deleteBrand() {
-    if (window.confirm('Are you sure you want to delete the brand?')) {
-      let brandModule: Brand = {
-        brandId: this.brand.brandId,
-        ...this.brandEditForm.value,
-      };
-      this.brandService.deleteBrand(brandModule).subscribe(
-        (response) => {
-          this.toastrService.success(response.message);
-          this.router.navigate(['admin', 'brands']);
-        },
-        (responseError) => {
-          if (responseError.error.Errors.length > 0)
-            responseError.error.Errors.forEach((error: any) =>
-              this.toastrService.error(error.ErrorMessage)
-            );
-        }
+    if (confirm("Delete brand?")) {
+      this.brandService.deleteBrand(this.brand).subscribe(res => {
+        this.toastrService.success("Brand deleted");
+        this.router.navigate(['admin', 'brands']);
+      }, err => {
+        this.toastrService.error("Delete failed");
+      }
       );
     }
   }
