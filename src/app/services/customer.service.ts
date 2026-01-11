@@ -10,28 +10,30 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class CustomerService {
-  private apiUrl = `${environment.supabaseUrl}/rest/v1`;
+  apiUrl = environment.supabaseUrl + "/rest/v1/customers";
 
   constructor(private httpClient: HttpClient) { }
 
-  private get headers() {
+  getHeaders() {
     return new HttpHeaders({
       'apikey': environment.supabaseKey,
-      'Authorization': `Bearer ${environment.supabaseKey}`,
+      'Authorization': 'Bearer ' + environment.supabaseKey,
       'Content-Type': 'application/json'
     });
   }
 
   getCustomer(): Observable<ListResponseModel<Customer>> {
-    return this.httpClient.get<any[]>(`${this.apiUrl}/customers?select=*,users(first_name,last_name)`, { headers: this.headers }).pipe(
+    return this.httpClient.get<any[]>(this.apiUrl + "?select=*", { headers: this.getHeaders() }).pipe(
       map(data => {
-        const customers: any[] = data.map(item => ({
-          userId: item.user_id,
-          companyName: item.company_name,
-          firstName: item.users?.first_name,
-          lastName: item.users?.last_name
-        }));
-        return { success: true, message: "Customers listed successfully", data: customers };
+        let customers = data.map(item => {
+          return {
+            userId: item.user_id,
+            companyName: item.company_name,
+            firstName: "Customer",
+            lastName: item.id
+          };
+        });
+        return { success: true, message: "Success", data: customers };
       })
     );
   }

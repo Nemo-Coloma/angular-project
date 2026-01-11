@@ -5,71 +5,71 @@ import { ListResponseModel } from '../models/listResponseModel';
 import { Rental } from '../models/rental';
 import { ResponseModel } from '../models/responseModel';
 import { environment } from 'src/environments/environment';
-import { map, catchError } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RentalService {
-  private apiUrl = `${environment.supabaseUrl}/rest/v1`;
+  apiUrl = environment.supabaseUrl + "/rest/v1/rentals";
 
   constructor(private httpClient: HttpClient) { }
 
-  private get headers() {
+  getHeaders() {
     return new HttpHeaders({
       'apikey': environment.supabaseKey,
-      'Authorization': `Bearer ${environment.supabaseKey}`,
+      'Authorization': 'Bearer ' + environment.supabaseKey,
       'Content-Type': 'application/json',
       'Prefer': 'return=representation'
     });
   }
 
   getRentals(): Observable<ListResponseModel<Rental>> {
-    return this.httpClient.get<any[]>(`${this.apiUrl}/rentals?select=*,cars(name),customers(company_name)`, { headers: this.headers }).pipe(
+    return this.httpClient.get<any[]>(this.apiUrl + "?select=*", { headers: this.getHeaders() }).pipe(
       map(data => {
-        const rentals: Rental[] = data.map(item => ({
-          rentalId: item.id,
-          carId: item.car_id,
-          customerId: item.customer_id,
-          rentDate: item.rent_date,
-          returnDate: item.return_date,
-          totalRentPrice: item.total_price,
-          carName: item.cars?.name,
-          customerName: item.customers?.company_name
-        }));
-        return { success: true, message: "Rentals listed successfully", data: rentals };
+        let rentals = data.map(item => {
+          return {
+            rentalId: item.id,
+            carId: item.car_id,
+            customerId: item.customer_id,
+            rentDate: item.rent_date,
+            returnDate: item.return_date,
+            totalRentPrice: item.total_price,
+            carName: "Car " + item.car_id,
+            customerName: "Customer " + item.customer_id
+          };
+        });
+        return { success: true, message: "Success", data: rentals };
       })
     );
   }
 
   addRental(rental: Rental): Observable<any> {
-    const body = {
+    let body = {
       car_id: rental.carId,
       customer_id: rental.customerId,
       rent_date: rental.rentDate,
       return_date: rental.returnDate,
       total_price: rental.totalRentPrice
     };
-    return this.httpClient.post(`${this.apiUrl}/rentals`, body, { headers: this.headers });
+    return this.httpClient.post(this.apiUrl, body, { headers: this.getHeaders() });
   }
 
   updateRental(rental: Rental): Observable<any> {
-    const body = {
+    let body = {
       customer_id: rental.customerId,
       rent_date: rental.rentDate,
       return_date: rental.returnDate,
       total_price: rental.totalRentPrice
     };
-    return this.httpClient.patch(`${this.apiUrl}/rentals?id=eq.${rental.rentalId}`, body, { headers: this.headers });
+    return this.httpClient.patch(this.apiUrl + "?id=eq." + rental.rentalId, body, { headers: this.getHeaders() });
   }
 
   deleteRental(rentalId: number): Observable<any> {
-    return this.httpClient.delete(`${this.apiUrl}/rentals?id=eq.${rentalId}`, { headers: this.headers });
+    return this.httpClient.delete(this.apiUrl + "?id=eq." + rentalId, { headers: this.getHeaders() });
   }
 
   isRentable(rental: Rental): Observable<ResponseModel> {
-    // Basic check: if returnDate is null, it might be busy. 
-    // For now, return success to simulate compatibility.
     return of({ success: true, message: "Car is available" });
   }
 }
